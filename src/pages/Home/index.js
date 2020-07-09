@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { Jumbotron } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+
 import { selectRestaurants } from "../../store/restaurants/selectors";
 import { fetchRestaurants } from "../../store/restaurants/actions";
 
-import { Jumbotron } from "react-bootstrap";
-import Container from "react-bootstrap/Container";
+import RestaurantCard from "../../components/RestaurantCard";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -27,7 +29,8 @@ export default function Home() {
         restaurants.map((restaurant, i) => {
           return (
             <p key={i}>
-              <p>{`Name ${restaurant.name}`}</p>
+              {" "}
+              <RestaurantCard data={restaurant} />
             </p>
           );
         })}
