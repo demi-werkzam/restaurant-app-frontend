@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Jumbotron } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
@@ -9,8 +10,27 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Accordion from "react-bootstrap/Accordion";
 
+import "./index.css";
+import { updateAmountOfVisits } from "../../store/visits/actions";
+
 export default function RestaurantCard(props) {
   const { id, name, address, email } = props.data;
+  const [visited, setVisit] = useState(false);
+  const dispatch = useDispatch();
+
+  const visitedCheck = visited ? (
+    <span role="img" aria-label="check mark button">
+      ✅
+    </span>
+  ) : (
+    <span role="img" aria-label="white large square">
+      ⬜
+    </span>
+  );
+
+  const addVisit = () => {
+    dispatch(updateAmountOfVisits(setVisit(!visited)));
+  };
 
   return (
     <Container>
@@ -39,6 +59,10 @@ export default function RestaurantCard(props) {
                 </Card.Body>
               </Accordion.Collapse>
             </Accordion>
+            <button class="emojiButton" onClick={addVisit}>
+              {visitedCheck}
+            </button>
+            <br />
           </Card>
         </Col>
       </Row>

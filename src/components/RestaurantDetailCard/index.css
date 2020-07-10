@@ -1,0 +1,10 @@
+.emojiButton {
+  background: none;
+  border: none;
+  left: 0;
+  width: 120px;
+}
+
+.emojiButton:focus {
+  outline: none;
+}
