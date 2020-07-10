@@ -18,8 +18,6 @@ export default function Home() {
 
   const restaurants = useSelector(selectRestaurants) || [];
 
-  console.log(111, restaurants);
-
   return (
     <Container>
       <Jumbotron>
