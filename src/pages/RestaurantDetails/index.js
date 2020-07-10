@@ -26,9 +26,6 @@ export default function RestaurantDetails() {
 
   return (
     <Container>
-      <Jumbotron>
-        <h1>Restaurant Details</h1>
-      </Jumbotron>
       {filteredRestaurants.map((restaurant, i) => {
         return (
           <div key={i}>
