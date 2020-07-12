@@ -1,4 +1,7 @@
+ feat-likeButton
+.visitedButton {
 .emojiButton {
+development
   background: none;
   border: none;
   left: 0;
@@ -8,3 +11,15 @@
 .emojiButton:focus {
   outline: none;
 }
+ feat-likeButton
+
+.heartButton {
+  background: none;
+  border: none;
+  width: 120px;
+}
+
+.emojiButton:focus {
+  outline: none;
+  }
+ development
