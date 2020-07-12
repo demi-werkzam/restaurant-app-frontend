@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
+import CardColumns from "react-bootstrap/CardColumns";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
@@ -21,8 +22,8 @@ export default function RestaurantCard(props) {
         <Col>
           <Card>
             <Card.Body>
-              <Card.Title>{`Name ${name}`}</Card.Title>
-              <Card.Title>{`Address ${address}`}</Card.Title>
+              <Card.Title>{` ${name}`}</Card.Title>
+              <Card.Text>{`Address ${address}`}</Card.Text>
               <Button variant="primary" onClick={goToRestaurant}>
                 See details
               </Button>

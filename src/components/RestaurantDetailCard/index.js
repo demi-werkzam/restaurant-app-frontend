@@ -15,9 +15,13 @@ import { updateAmountOfVisits } from "../../store/visits/actions";
 
 export default function RestaurantCard(props) {
   const { id, name, address, email } = props.data;
+feat-likeButton
   const { token } = props;
   const [visited, setVisit] = useState(false);
   const [liked, setLike] = useState(false);
+
+  const [visited, setVisit] = useState(false);
+development
   const dispatch = useDispatch();
 
   const visitedCheck = visited ? (
@@ -30,6 +34,7 @@ export default function RestaurantCard(props) {
     </span>
   );
 
+feat-likeButton
   const likedCheck = liked ? (
     <span role="img" aria-label="sparkling heart">
       💖
@@ -40,6 +45,8 @@ export default function RestaurantCard(props) {
     </span>
   );
 
+
+ development
   const addVisit = () => {
     dispatch(updateAmountOfVisits(setVisit(!visited)));
   };
@@ -71,6 +78,7 @@ export default function RestaurantCard(props) {
                 </Card.Body>
               </Accordion.Collapse>
             </Accordion>
+feat-likeButton
 
             {token && (
               <button class="visitedButton" onClick={addVisit}>
@@ -81,7 +89,11 @@ export default function RestaurantCard(props) {
               <button class="heartButton" onClick={() => setLike(!liked)}>
                 <span role="img">{likedCheck}</span>
               </button>
-            )}
+
+            <button class="emojiButton" onClick={addVisit}>
+              {visitedCheck}
+            </button>
+ development
             <br />
           </Card>
         </Col>
