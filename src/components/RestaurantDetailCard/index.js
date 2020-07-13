@@ -12,16 +12,14 @@ import Accordion from "react-bootstrap/Accordion";
 
 import "./index.css";
 import { updateAmountOfVisits } from "../../store/visits/actions";
+import RestaurantMap from "../RestaurantMap";
 
 export default function RestaurantCard(props) {
-  const { id, name, address, email } = props.data;
-feat-likeButton
+  const { id, name, address, email, latitude, longitude } = props.data;
   const { token } = props;
   const [visited, setVisit] = useState(false);
   const [liked, setLike] = useState(false);
 
-  const [visited, setVisit] = useState(false);
-development
   const dispatch = useDispatch();
 
   const visitedCheck = visited ? (
@@ -34,7 +32,6 @@ development
     </span>
   );
 
-feat-likeButton
   const likedCheck = liked ? (
     <span role="img" aria-label="sparkling heart">
       💖
@@ -45,8 +42,6 @@ feat-likeButton
     </span>
   );
 
-
- development
   const addVisit = () => {
     dispatch(updateAmountOfVisits(setVisit(!visited)));
   };
@@ -78,8 +73,6 @@ feat-likeButton
                 </Card.Body>
               </Accordion.Collapse>
             </Accordion>
-feat-likeButton
-
             {token && (
               <button class="visitedButton" onClick={addVisit}>
                 {visitedCheck}
@@ -89,13 +82,10 @@ feat-likeButton
               <button class="heartButton" onClick={() => setLike(!liked)}>
                 <span role="img">{likedCheck}</span>
               </button>
-
-            <button class="emojiButton" onClick={addVisit}>
-              {visitedCheck}
-            </button>
- development
+            )}
             <br />
           </Card>
+          <RestaurantMap id={id} latitude={latitude} longitude={longitude} />
         </Col>
       </Row>
     </Container>
