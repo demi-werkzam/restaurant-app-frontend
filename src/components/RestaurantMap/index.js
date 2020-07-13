@@ -7,7 +7,7 @@ import "./index.css";
 export default function RestaurantMap(props) {
   const { id, latitude, longitude } = props;
   return (
-    <Map center={[52.370216, 4.895168]} zoom={12}>
+    <Map center={[latitude, longitude]} zoom={20}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
