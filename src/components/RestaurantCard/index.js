@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import CardColumns from "react-bootstrap/CardColumns";
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Card from "react-bootstrap/Card";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { Map, Marker, Popup, TileLayer } from "react-leaflet";
+import { Icon } from "leaflet";
+
+import "./index.css";
 
 export default function RestaurantCard(props) {
-  const { id, name, address } = props.data;
+  const { id, name, address, longitude, latitude } = props.data;
   const history = useHistory();
 
   const goToRestaurant = () => {
@@ -17,20 +15,12 @@ export default function RestaurantCard(props) {
   };
 
   return (
-    <Container>
-      <Row>
-        <Col>
-          <Card>
-            <Card.Body>
-              <Card.Title>{` ${name}`}</Card.Title>
-              <Card.Text>{`Address ${address}`}</Card.Text>
-              <Button variant="primary" onClick={goToRestaurant}>
-                See details
-              </Button>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-    </Container>
+    <Map center={[52.370216, 4.895168]} zoom={12}>
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      />
+      <Marker position={[latitude, longitude]} onClick={goToRestaurant} />
+    </Map>
   );
 }
