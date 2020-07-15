@@ -9,13 +9,15 @@ import NavbarItem from "./NavbarItem";
 import LoggedIn from "./LoggedIn";
 import LoggedOut from "./LoggedOut";
 
+import "./index.css";
+
 export default function Navigation() {
   const token = useSelector(selectToken);
 
   const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar className="nav-color" expand="lg">
       <Navbar.Brand as={NavLink} to="/">
         Search Restaurant
       </Navbar.Brand>
