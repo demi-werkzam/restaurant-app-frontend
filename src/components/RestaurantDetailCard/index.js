@@ -9,6 +9,8 @@ import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Accordion from "react-bootstrap/Accordion";
+import { FaInstagramSquare } from "react-icons/fa";
+import { AiFillPhone } from "react-icons/ai";
 
 import "./index.css";
 import { updateAmountOfVisits } from "../../store/visits/actions";
@@ -67,12 +69,41 @@ export default function RestaurantCard(props) {
               </Card.Header>
               <Accordion.Collapse eventKey="0">
                 <Card.Body>
-                  <Card.Text className="text-right">{`Address: ${address}`}</Card.Text>
+                  <Col>
+                    <Card.Text className="text-right">{`Address: ${address}`}</Card.Text>
+                  </Col>
+                  <AiFillPhone size="1.5rem" />
                   <Card.Text className="text-right">{`Telephone Number: Has to be added`}</Card.Text>
                   <Card.Text className="text-right">{`Email: ${email}`}</Card.Text>
                 </Card.Body>
               </Accordion.Collapse>
             </Accordion>
+          </Card>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Card className="cardLeft">
+            <Col>
+              <FaInstagramSquare size="3rem" />
+            </Col>
+            <Col>
+              <Card.Text>{`Follow ${name} on instagram to keep up with what they're doing`}</Card.Text>
+              <Button
+                variant="dark"
+                size="lg"
+                href="https://www.instagram.com/yourlbb/"
+              >
+                Follow
+              </Button>
+            </Col>
+          </Card>
+        </Col>
+        <Col>
+          <Card className="cardLeft">
+            <Card.Text>
+              Let us know if you have visited this restaurant before
+            </Card.Text>
             {token && (
               <button class="visitedButton" onClick={addVisit}>
                 {visitedCheck}
@@ -83,11 +114,10 @@ export default function RestaurantCard(props) {
                 <span role="img">{likedCheck}</span>
               </button>
             )}
-            <br />
           </Card>
-          <RestaurantMap id={id} latitude={latitude} longitude={longitude} />
         </Col>
       </Row>
+      <RestaurantMap id={id} latitude={latitude} longitude={longitude} />
     </Container>
   );
 }

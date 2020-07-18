@@ -15,3 +15,10 @@
   border: none;
   width: 120px;
 }
+
+.cardLeft {
+  left: 30px;
+  width: 400px;
+  height: 200px;
+  border-bottom-color: #444;
+}
