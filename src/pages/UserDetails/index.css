@@ -1,0 +1,14 @@
+.cardLeft {
+  left: 30px;
+  width: 1000px;
+  height: 300px;
+}
+
+.imageLeft {
+  left: 70px;
+}
+
+.sentence {
+  line-height: 30px;
+  width: 300px;
+}
