@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import RestaurantDetails from "./pages/RestaurantDetails";
+import UserDetails from "./pages/UserDetails";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
         <Route path="/restaurants/:id" component={RestaurantDetails} />
+        <Route path="/users/:id" component={UserDetails} />
       </Switch>
     </div>
   );
