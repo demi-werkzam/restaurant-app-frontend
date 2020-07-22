@@ -65,7 +65,15 @@ export default function Home() {
             }}
           >
             <div>
-              <h2> Hello there</h2>
+              <h6>{`${activeRestaurant.name}`} </h6>
+              <hr></hr>
+              <p>Want to know more about this restaurant?</p>
+              <button
+                class="btn"
+                onClick={() => goToRestaurant(activeRestaurant.id)}
+              >
+                Click here!
+              </button>
             </div>
           </Popup>
         )}
