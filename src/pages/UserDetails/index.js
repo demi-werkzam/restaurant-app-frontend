@@ -9,12 +9,10 @@ import Col from "react-bootstrap/Col";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 
-import {
-  selectRestaurants,
-  selectVisits,
-} from "../../store/restaurants/selectors";
+import { selectRestaurants } from "../../store/restaurants/selectors";
 import { fetchRestaurants } from "../../store/restaurants/actions";
 import Visited from "../../components/Visted";
+import Liked from "../../components/Liked";
 import "./index.css";
 
 import { FaRegUserCircle } from "react-icons/fa";
@@ -51,7 +49,12 @@ export default function UserDetails() {
               return <Visited key={id} data={restaurant} />;
             })}
         </Tab>
-        <Tab eventKey="liked" title="Liked"></Tab>
+        <Tab eventKey="liked" title="Liked">
+          {restaurants &&
+            restaurants.map((restaurant, id) => {
+              return <Liked key={id} data={restaurant} />;
+            })}
+        </Tab>
         <Tab eventKey="requested" title="Requested"></Tab>
       </Tabs>
     </Container>
