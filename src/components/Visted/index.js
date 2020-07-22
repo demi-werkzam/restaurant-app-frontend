@@ -1,6 +1,12 @@
 import React from "react";
 import { restaurantsFetched } from "../../store/restaurants/actions";
 
+import Container from "react-bootstrap/Container";
+import CardColumns from "react-bootstrap/CardColumns";
+import Card from "react-bootstrap/Card";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
 export default function Visited(props) {
   const { visits, createdAt, name, id } = props.data;
 
@@ -17,21 +23,26 @@ export default function Visited(props) {
     //   id
     // );
     if (visit.userId === UserId && visit.restaurantId === id) return name;
+    else return null;
   });
 
   console.log(12345, visitsFiltered);
 
-  //   const restaurantId = 4;
-  //   const specificrestaurantDetails = restaurant.find((p) => {
-  //     console.log(11111, p);
-  //     return p.id;
-  //   });
-
-  //   match visit.restaurantId to the namd of the restaurant
-
   return (
-    <div>
-      <p>{visitsFiltered}</p>
-    </div>
+    <CardColumns>
+      <Card>
+        <Card.Img variant="top" src="holder.js/100px160" />
+        <Card.Body>
+          <Card.Title>{visitsFiltered}</Card.Title>
+          <Card.Text>
+            This is a wider card with supporting text below as a natural lead-in
+            to additional content. This content is a little bit longer.
+          </Card.Text>
+        </Card.Body>
+        <Card.Footer>
+          <small className="text-muted">Last updated 3 mins ago</small>
+        </Card.Footer>
+      </Card>
+    </CardColumns>
   );
 }
