@@ -1,0 +1,10 @@
+.cardLeft {
+  left: 30px;
+  width: 1000px;
+  height: 300px;
+}
+
+.sentence {
+  line-height: 30px;
+  width: 300px;
+}
