@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+
+import { useDispatch, useSelector } from "react-redux";
 
 import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
@@ -7,20 +9,25 @@ import Col from "react-bootstrap/Col";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 
+import {
+  selectRestaurants,
+  selectVisits,
+} from "../../store/restaurants/selectors";
+import { fetchRestaurants } from "../../store/restaurants/actions";
+import Visited from "../../components/Visted";
 import "./index.css";
 
 import { FaRegUserCircle } from "react-icons/fa";
 
-const pageContent = (eventKey) => {
-  if (eventKey === "link-1") {
-    return <div>hey it worked! </div>;
-  }
-  if (eventKey === "link-2") {
-    return <div> It worked again! </div>;
-  }
-};
-
 export default function UserDetails() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchRestaurants);
+  }, []);
+
+  const restaurants = useSelector(selectRestaurants) || [];
+
   return (
     <Container Container fluid="md">
       <Card className="cardLeft">
@@ -38,7 +45,12 @@ export default function UserDetails() {
       </Card>
 
       <Tabs defaultActiveKey="visited">
-        <Tab eventKey="visited" title="Visited"></Tab>
+        <Tab eventKey="visited" title="Visited">
+          {restaurants &&
+            restaurants.map((restaurant, id) => {
+              return <Visited key={id} data={restaurant} />;
+            })}
+        </Tab>
         <Tab eventKey="liked" title="Liked"></Tab>
         <Tab eventKey="requested" title="Requested"></Tab>
       </Tabs>
