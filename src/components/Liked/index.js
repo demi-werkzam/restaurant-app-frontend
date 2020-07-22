@@ -4,22 +4,22 @@ import CardColumns from "react-bootstrap/CardColumns";
 import Card from "react-bootstrap/Card";
 
 export default function Liked(props) {
-  const { visits, likes, createdAt, name, id } = props.data;
+  const { visits, createdAt, name, id } = props.data;
 
   const UserId = 2;
 
   const likesFiltered = visits.map((visit) => {
-    console.log(
-      1234,
-      "this is the visitId:",
-      visit.userId,
-      "This is the restaurantId:",
-      visit.restaurantId,
-      "this is the restaurantId passed down:",
-      id,
-      "this is visit.likes",
-      visit.likes
-    );
+    // console.log(
+    //   1234,
+    //   "this is the visitId:",
+    //   visit.userId,
+    //   "This is the restaurantId:",
+    //   visit.restaurantId,
+    //   "this is the restaurantId passed down:",
+    //   id,
+    //   "this is visit.likes",
+    //   visit.likes
+    // );
     if (visit.visitId === UserId && visit.restaurantId === id)
       //   visit.likes.map((l) => {
       //     console.log(123456, "inside visit.like.map. l.liked is:", l.liked);
