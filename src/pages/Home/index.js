@@ -1,21 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import { Map, Marker, TileLayer } from "react-leaflet";
+import { Map, Marker, TileLayer, Popup } from "react-leaflet";
+import { Icon } from "leaflet";
 
-import "./index.css";
-
-import { Jumbotron } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Carousel from "react-bootstrap/Carousel";
+
+import { GiKnifeFork } from "react-icons/gi";
 
 import { selectRestaurants } from "../../store/restaurants/selectors";
 import { fetchRestaurants } from "../../store/restaurants/actions";
 
+import "./index.css";
+
+export const icon = new Icon({
+  iconUrl: <GiKnifeFork />,
+  iconSize: [25, 25],
+});
+
 export default function Home() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const [activeRestaurant, setActiveRestaurant] = useState(null);
 
   useEffect(() => {
     dispatch(fetchRestaurants);
@@ -51,9 +59,31 @@ export default function Home() {
             <Marker
               key={restaurant.id}
               position={[restaurant.latitude, restaurant.longitude]}
-              onClick={() => goToRestaurant(restaurant.id)}
+              onClick={() => {
+                setActiveRestaurant(restaurant);
+              }}
             />
           ))}
+        {activeRestaurant && (
+          <Popup
+            position={[activeRestaurant.latitude, activeRestaurant.longitude]}
+            onClose={() => {
+              setActiveRestaurant(null);
+            }}
+          >
+            <div>
+              <h6>{`${activeRestaurant.name}`} </h6>
+              <hr></hr>
+              <p>Want to know more about this restaurant?</p>
+              <button
+                class="btn"
+                onClick={() => goToRestaurant(activeRestaurant.id)}
+              >
+                Click here!
+              </button>
+            </div>
+          </Popup>
+        )}
       </Map>
     </Container>
   );
