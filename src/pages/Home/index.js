@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import { Map, Marker, TileLayer } from "react-leaflet";
+import { Map, Marker, TileLayer, Popup } from "react-leaflet";
 
 import "./index.css";
 
@@ -16,6 +16,7 @@ import { fetchRestaurants } from "../../store/restaurants/actions";
 export default function Home() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const [activeRestaurant, setActiveRestaurant] = useState(null);
 
   useEffect(() => {
     dispatch(fetchRestaurants);
@@ -51,9 +52,23 @@ export default function Home() {
             <Marker
               key={restaurant.id}
               position={[restaurant.latitude, restaurant.longitude]}
-              onClick={() => goToRestaurant(restaurant.id)}
+              onClick={() => {
+                setActiveRestaurant(restaurant);
+              }}
             />
           ))}
+        {activeRestaurant && (
+          <Popup
+            position={[activeRestaurant.latitude, activeRestaurant.longitude]}
+            onClose={() => {
+              setActiveRestaurant(null);
+            }}
+          >
+            <div>
+              <h2> Hello there</h2>
+            </div>
+          </Popup>
+        )}
       </Map>
     </Container>
   );
