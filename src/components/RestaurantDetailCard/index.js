@@ -19,10 +19,16 @@ import RestaurantMap from "../RestaurantMap";
 export default function RestaurantCard(props) {
   const { id, name, address, email, latitude, longitude } = props.data;
   const { token } = props;
+
   const [visited, setVisit] = useState(false);
   const [liked, setLike] = useState(false);
 
+  const history = useHistory();
   const dispatch = useDispatch();
+
+  const goToAddRequest = () => {
+    history.push(`/requests`);
+  };
 
   const visitedCheck = visited ? (
     <span role="img" aria-label="check mark button">
@@ -100,7 +106,7 @@ export default function RestaurantCard(props) {
           </Card>
         </Col>
         <Col>
-          <Card className="cardLeft">
+          <Card>
             <Card.Text>
               Let us know if you have visited this restaurant before
             </Card.Text>
@@ -114,7 +120,7 @@ export default function RestaurantCard(props) {
                 <span role="img">{likedCheck}</span>
               </button>
             )}
-            <Button variant="dark" size="lg">
+            <Button variant="dark" size="lg" onClick={goToAddRequest}>
               Invite others
             </Button>
           </Card>
