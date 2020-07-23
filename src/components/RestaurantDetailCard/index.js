@@ -83,7 +83,7 @@ export default function RestaurantCard(props) {
       </Row>
       <Row>
         <Col>
-          <Card className="cardLeft">
+          <Card>
             <Col>
               <FaInstagramSquare size="3rem" />
             </Col>
@@ -114,6 +114,9 @@ export default function RestaurantCard(props) {
                 <span role="img">{likedCheck}</span>
               </button>
             )}
+            <Button variant="dark" size="lg">
+              Invite others
+            </Button>
           </Card>
         </Col>
       </Row>
