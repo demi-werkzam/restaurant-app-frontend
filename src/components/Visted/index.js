@@ -9,9 +9,7 @@ import Col from "react-bootstrap/Col";
 
 export default function Visited(props) {
   const { visits, createdAt, name, id } = props.data;
-
-  const UserId = 2;
-
+  const { UserId } = props;
   const visitsFiltered = visits.map((visit) => {
     // console.log(
     //   1234,

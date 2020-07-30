@@ -4,7 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import { selectToken } from "../../store/user/selectors";
+import { selectToken, selectUserId } from "../../store/user/selectors";
 import NavbarItem from "./NavbarItem";
 import LoggedIn from "./LoggedIn";
 import LoggedOut from "./LoggedOut";
@@ -13,8 +13,9 @@ import "./index.css";
 
 export default function Navigation() {
   const token = useSelector(selectToken);
+  const userId = useSelector(selectUserId);
 
-  const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
+  const loginLogoutControls = token ? <LoggedIn id={userId} /> : <LoggedOut />;
 
   return (
     <Navbar variant="light" className="nav-color" expand="lg">
@@ -23,9 +24,11 @@ export default function Navigation() {
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
-        <Nav style={{ width: "100%" }} fill>
-          <NavbarItem path="/" linkText="Home" />
-        </Nav>
+        <Nav style={{ width: "100%" }} fill></Nav>
+        <NavbarItem
+          path={`/home/users/${userId}/restaurant`}
+          linkText="Add Restaurant"
+        />
         {loginLogoutControls}
       </Navbar.Collapse>
     </Navbar>
