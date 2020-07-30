@@ -7,21 +7,21 @@ import {
   showMessageWithTimeout,
 } from "../appState/actions";
 
-export function setVisits() {
+export function setLikes() {
   return {
-    type: "SET_VISITS",
+    type: "SET_LIKES",
   };
 }
 
-export const addVisit = (id, token) => {
+export const addLike = (id, token) => {
   return async (dispatch, getState) => {
     const { user } = getState();
     dispatch(appLoading());
     try {
       const response = await axios.post(
-        `${apiUrl}/visit`,
+        `${apiUrl}/like`,
         {
-          visited: true,
+          liked: true,
           id,
           user,
         },
@@ -31,7 +31,7 @@ export const addVisit = (id, token) => {
           },
         }
       );
-      dispatch(setVisits(...response.data));
+      dispatch(setLikes(...response.data));
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
@@ -46,15 +46,15 @@ export const addVisit = (id, token) => {
   };
 };
 
-export const updateVisit = (id, token) => {
+export const updateLike = (id, token) => {
   return async (dispatch, getState) => {
     const { user } = getState();
     dispatch(appLoading());
     try {
       const response = await axios.patch(
-        `${apiUrl}/visit`,
+        `${apiUrl}/like`,
         {
-          visited: false,
+          liked: true,
           id,
         },
         {
@@ -63,7 +63,7 @@ export const updateVisit = (id, token) => {
           },
         }
       );
-      dispatch(setVisits(...response.data));
+      dispatch(setLikes(...response.data));
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {

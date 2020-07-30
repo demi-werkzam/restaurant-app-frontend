@@ -87,13 +87,10 @@ export const getUserWithStoredToken = () => {
 
     dispatch(appLoading());
     try {
-      // if we do have a token,
-      // check wether it is still valid or if it is expired
       const response = await axios.get(`${apiUrl}/me`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      // token is still valid
       dispatch(tokenStillValid(response.data));
       dispatch(appDoneLoading());
     } catch (error) {
@@ -102,8 +99,7 @@ export const getUserWithStoredToken = () => {
       } else {
         console.log(error);
       }
-      // if we get a 4xx or 5xx response,
-      // get rid of the token by logging out
+
       dispatch(logOut());
       dispatch(appDoneLoading());
     }

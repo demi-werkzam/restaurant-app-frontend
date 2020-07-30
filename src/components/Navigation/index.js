@@ -19,7 +19,7 @@ export default function Navigation() {
   return (
     <Navbar className="nav-color" expand="lg">
       <Navbar.Brand as={NavLink} to="/">
-        Search Restaurant
+        <img src="R.png" />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">

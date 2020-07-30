@@ -2,7 +2,7 @@ const initialState = {};
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case "SET_VISITS": {
+    case "SET_LIKES": {
       return action.payload;
     }
 
