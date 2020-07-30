@@ -12,7 +12,7 @@ import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import RestaurantDetails from "./pages/RestaurantDetails";
 import UserDetails from "./pages/UserDetails";
-import AddRequest from "./pages/AddRequest";
+import AddRsvp from "./pages/AddRsvp";
 
 import { selectAppLoading } from "./store/appState/selectors";
 import { getUserWithStoredToken } from "./store/user/actions";
@@ -34,7 +34,7 @@ function App() {
         <Route path="/signup" component={SignUp} />
         <Route path="/restaurants/:id" component={RestaurantDetails} />
         <Route path="/users" component={UserDetails} />
-        <Route path="/requests" component={AddRequest} />
+        <Route path="/rsvp" component={AddRsvp} />
       </Switch>
     </div>
   );

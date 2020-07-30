@@ -11,14 +11,14 @@ import * as Yup from "yup";
 
 import { selectToken, selectUser } from "../../store/user/selectors";
 import {
-  postNewRequest,
+  postNewRsvp,
   fetchUser,
-  addFriendsToRequest,
-  addRequest,
-} from "../../store/addRequests/actions";
+  addFriendsToRsvp,
+  addRsvp,
+} from "../../store/addRsvp/actions";
 import MessageBox from "../../components/MessageBox/index";
 import "./index.css";
-import { selectNewRequest } from "../../store/addRequests/selectors";
+import { selectNewRsvp } from "../../store/addRsvp/selectors";
 
 // Yup Schema
 const validationSchema = Yup.object().shape({
@@ -26,7 +26,7 @@ const validationSchema = Yup.object().shape({
   start_at: Yup.string().required("*start time is required"),
 });
 
-export default function AddRequest() {
+export default function AddRsvp() {
   const today = new Date().toISOString().split("T", 1)[0];
   const [friends, setFriends] = useState([]);
   const [email, setEmail] = useState("");
@@ -36,7 +36,7 @@ export default function AddRequest() {
   console.log(12, token);
 
   const user = useSelector(selectUser);
-  const { request = {}, newUser = {} } = useSelector(selectNewRequest) || {};
+  const { rsvp = {}, newUser = {} } = useSelector(selectNewRsvp) || {};
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -51,28 +51,28 @@ export default function AddRequest() {
     }
   };
 
-  function addRequest(values) {
+  function addRsvp(values) {
     console.log(
       "date:",
-      typeof values.date,
+      typeof values.rsvp_date,
       "start at:",
       typeof values.start_at
     );
 
     const data = new FormData();
-    data.append("date", values.date);
-    data.append("start start_at", values.start_at);
+    data.append("rsvp_date", values.rsvp_date);
+    data.append("start_at", values.start_at);
     console.log("data:", data);
 
-    dispatch(postNewRequest(data, token));
+    dispatch(postNewRsvp(data, token));
   }
 
   function finalSubmit(event) {
     event.preventDefault();
-    dispatch(addFriendsToRequest(request.id, friends, user.id, token));
+    dispatch(addFriendsToRsvp(rsvp.id, friends, user.id, token));
 
     dispatch({
-      type: "CLEAR_Request",
+      type: "CLEAR_RSVP",
     });
     history.push("/");
   }
@@ -99,9 +99,9 @@ export default function AddRequest() {
     }
   }, [newUser]);
 
-  console.log(11, useSelector(selectNewRequest));
+  console.log(11, useSelector(selectNewRsvp));
 
-  console.log("request:", request);
+  console.log("rsvp:", rsvp);
   console.log("newUser:", newUser);
   console.log("friends:", friends);
   return (
@@ -113,7 +113,7 @@ export default function AddRequest() {
         <Container>
           <Formik
             initialValues={{
-              date: "",
+              rsvp_date: "",
               start_at: "",
             }}
             validationSchema={validationSchema}
@@ -124,7 +124,7 @@ export default function AddRequest() {
               // Simulate submitting to database, shows us values submitted, resets form
               setTimeout(() => {
                 //alert(JSON.stringify(values, null, 2));
-                addRequest(values);
+                addRsvp(values);
                 resetForm();
                 setSubmitting(false);
               }, 500);
@@ -147,14 +147,14 @@ export default function AddRequest() {
                 <Form.Group as={Row}>
                   <Form.Label>Pick A Date</Form.Label>
                   <Form.Control
-                    value={values.date}
+                    value={values.rsvp_date}
                     onChange={handleChange}
-                    name="date"
+                    name="rsvp_date"
                     type="date"
-                    className={touched.date && errors.date && "error"}
+                    className={touched.rsvp_date && errors.rsvp_date && "error"}
                   />
-                  {touched.date && errors.date ? (
-                    <div className="error-message">{errors.date}</div>
+                  {touched.rsvp_date && errors.rsvp_date ? (
+                    <div className="error-message">{errors.rsvp_date}</div>
                   ) : null}
                 </Form.Group>
 
@@ -192,7 +192,7 @@ export default function AddRequest() {
                 </p>
               ))
             : null}
-          {Object.entries(request).length !== 0 ? (
+          {Object.entries(rsvp).length !== 0 ? (
             <Form>
               <Form.Group as={Row}>
                 <Form.Label>

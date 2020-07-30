@@ -1,19 +1,20 @@
 const initialState = {
-  request: {},
+  rsvp: {},
   newUser: {},
 };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case "ADD_REQUEST":
+    case "ADD_RSVP":
       return {
         ...state,
-        request: payload,
+
+        rsvp: payload,
       };
-    case "CLEAR_REQUEST":
+    case "CLEAR_RSVP":
       return {
         ...state,
-        request: {},
+        rsvp: {},
         newUser: {},
       };
     case "ADD_USER":
