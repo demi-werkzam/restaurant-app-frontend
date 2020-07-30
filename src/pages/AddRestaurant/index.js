@@ -10,5 +10,14 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 
 export default function AddRestaurant() {
+  // Yup Schema
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required("*name is required"),
+    address: Yup.string().required("*start time is required"),
+    website: Yup.string().required("*website is required"),
+    instagram: Yup.string().required("*instagram is required"),
+    latitude: Yup.integer().required("*latitude is required"),
+    longitude: Yup.integer().required("*longitude is required"),
+  });
   return <div>Hello</div>;
 }
