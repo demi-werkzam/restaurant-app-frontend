@@ -8,21 +8,36 @@ import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Accordion from "react-bootstrap/Accordion";
+import CardGroup from "react-bootstrap/CardGroup";
 import { FaInstagramSquare } from "react-icons/fa";
 import { AiFillPhone } from "react-icons/ai";
 
 import "./index.css";
-import { updateAmountOfVisits } from "../../store/visits/actions";
+import { updateVisit, addVisit } from "../../store/visits/actions";
+import { updateLike, addLike } from "../../store/like/actions";
 import RestaurantMap from "../RestaurantMap";
 
 export default function RestaurantCard(props) {
-  const { id, name, address, email, latitude, longitude } = props.data;
+  const {
+    id,
+    name,
+    address,
+    latitude,
+    longitude,
+    instagram,
+    website,
+  } = props.data;
   const { token } = props;
+
   const [visited, setVisit] = useState(false);
   const [liked, setLike] = useState(false);
 
+  const history = useHistory();
   const dispatch = useDispatch();
+
+  const goToAddRequest = () => {
+    history.push(`/requests`);
+  };
 
   const visitedCheck = visited ? (
     <span role="img" aria-label="check mark button">
@@ -44,77 +59,91 @@ export default function RestaurantCard(props) {
     </span>
   );
 
-  const addVisit = () => {
-    dispatch(updateAmountOfVisits(setVisit(!visited)));
+  const addVisit = (id, token) => {
+    if (!visited) {
+      dispatch(updateVisit(setVisit(!visited)));
+    }
+    if (visited) {
+      dispatch(addVisit(setVisit(visited)));
+    }
+  };
+
+  const addLike = (id, token) => {
+    if (!liked) {
+      dispatch(updateLike(setLike(!liked)));
+    }
+    if (liked) {
+      dispatch(addLike(setLike(liked)));
+    }
   };
 
   return (
     <Container>
-      <Jumbotron>
+      <Jumbotron style={{ background: "#efefef" }}>
         <h1>{`${name}`}</h1>
       </Jumbotron>
       <Row>
         <Col>
-          <Card border="light" bg="dark">
-            <Accordion className="text-right">
-              <Card.Header>
-                <Accordion.Toggle
-                  bg="Light"
-                  as={Button}
-                  variant="light"
-                  eventKey="0"
-                >
-                  More information
-                </Accordion.Toggle>
-              </Card.Header>
-              <Accordion.Collapse eventKey="0">
-                <Card.Body>
-                  <Col>
-                    <Card.Text className="text-right">{`Address: ${address}`}</Card.Text>
-                  </Col>
-                  <AiFillPhone size="1.5rem" />
-                  <Card.Text className="text-right">{`Telephone Number: Has to be added`}</Card.Text>
-                  <Card.Text className="text-right">{`Email: ${email}`}</Card.Text>
-                </Card.Body>
-              </Accordion.Collapse>
-            </Accordion>
-          </Card>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <Card className="cardLeft">
+          <Card>
             <Col>
               <FaInstagramSquare size="3rem" />
             </Col>
             <Col>
               <Card.Text>{`Follow ${name} on instagram to keep up with what they're doing`}</Card.Text>
-              <Button
-                variant="dark"
-                size="lg"
-                href="https://www.instagram.com/yourlbb/"
-              >
-                Follow
+              <Button variant="dark" size="lg" href={`${instagram}`}>
+                Check out their instagram
               </Button>
             </Col>
           </Card>
         </Col>
         <Col>
-          <Card className="cardLeft">
+          <Card>
             <Card.Text>
               Let us know if you have visited this restaurant before
             </Card.Text>
             {token && (
-              <button class="visitedButton" onClick={addVisit}>
+              <button className="visitedButton" onClick={addVisit}>
                 {visitedCheck}
               </button>
             )}
             {visited && (
-              <button class="heartButton" onClick={() => setLike(!liked)}>
+              <button className="heartButton" onClick={addLike}>
                 <span role="img">{likedCheck}</span>
               </button>
             )}
+            <Button variant="dark" size="lg" onClick={goToAddRequest}>
+              Invite others
+            </Button>
           </Card>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <CardGroup>
+            <Card
+              border="light"
+              style={{ background: "#b99c96" }}
+              className="text-center"
+            >
+              <Card.Body>
+                <Card.Text className="text-right">
+                  <h5>Want to book a table?</h5>
+                  <button className="btn" href={`${website}`}>
+                    {`Visit ${name}'s website here!`}
+                  </button>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+            <Card
+              border={"#b99c96"}
+              style={{ background: "#b99c96" }}
+              className="text-center"
+            >
+              <Card.Body>
+                <Card.Text className="text-right">{`Address: ${address}`}</Card.Text>
+              </Card.Body>
+            </Card>
+          </CardGroup>
         </Col>
       </Row>
       <RestaurantMap id={id} latitude={latitude} longitude={longitude} />

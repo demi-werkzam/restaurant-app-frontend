@@ -5,14 +5,14 @@ import { useParams } from "react-router-dom";
 import { selectRestaurants } from "../../store/restaurants/selectors";
 import { fetchRestaurants } from "../../store/restaurants/actions";
 import RestaurantDetailCard from "../../components/RestaurantDetailCard";
-import { selectToken } from "../../store/user/selectors";
+import { selectToken, selectUser } from "../../store/user/selectors";
 
-import { Jumbotron } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 
 export default function RestaurantDetails() {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
+  const user = useSelector(selectUser);
   const { id } = useParams();
 
   useEffect(() => {
