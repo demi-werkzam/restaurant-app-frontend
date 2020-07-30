@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "./node_modules/react";
-import { Jumbotron } from "./node_modules/react-bootstrap";
-import { useDispatch, useSelector } from "./node_modules/react-redux";
-import Form from "./node_modules/react-bootstrap/Form";
-import Container from "./node_modules/react-bootstrap/Container";
-import Button from "./node_modules/react-bootstrap/Button";
-import { Row } from "./node_modules/react-bootstrap";
-import { useHistory, Link } from "./node_modules/react-router-dom";
-import { Formik } from "./node_modules/formik";
-import * as Yup from "./node_modules/yup";
+import React, { useState, useEffect } from "react";
+import { Jumbotron } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import Form from "react-bootstrap/Form";
+import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
+import { Row } from "react-bootstrap";
+import { useHistory, Link } from "react-router-dom";
+import { Formik } from "formik";
+import * as Yup from "yup";
 
 import { selectToken, selectUser } from "../../store/user/selectors";
 import {
@@ -54,14 +54,14 @@ export default function AddRsvp() {
   function addRsvp(values) {
     console.log(
       "date:",
-      typeof values.date,
+      typeof values.rsvp_date,
       "start at:",
       typeof values.start_at
     );
 
     const data = new FormData();
-    data.append("date", values.date);
-    data.append("start start_at", values.start_at);
+    data.append("rsvp_date", values.rsvp_date);
+    data.append("start_at", values.start_at);
     console.log("data:", data);
 
     dispatch(postNewRsvp(data, token));
@@ -113,7 +113,7 @@ export default function AddRsvp() {
         <Container>
           <Formik
             initialValues={{
-              date: "",
+              rsvp_date: "",
               start_at: "",
             }}
             validationSchema={validationSchema}
@@ -147,14 +147,14 @@ export default function AddRsvp() {
                 <Form.Group as={Row}>
                   <Form.Label>Pick A Date</Form.Label>
                   <Form.Control
-                    value={values.date}
+                    value={values.rsvp_date}
                     onChange={handleChange}
-                    name="date"
+                    name="rsvp_date"
                     type="date"
-                    className={touched.date && errors.date && "error"}
+                    className={touched.rsvp_date && errors.rsvp_date && "error"}
                   />
-                  {touched.date && errors.date ? (
-                    <div className="error-message">{errors.date}</div>
+                  {touched.rsvp_date && errors.rsvp_date ? (
+                    <div className="error-message">{errors.rsvp_date}</div>
                   ) : null}
                 </Form.Group>
 
