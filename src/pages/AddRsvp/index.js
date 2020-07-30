@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { Jumbotron } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
-import { Row } from "react-bootstrap";
-import { useHistory, Link } from "react-router-dom";
-import { Formik } from "formik";
-import * as Yup from "yup";
+import React, { useState, useEffect } from "./node_modules/react";
+import { Jumbotron } from "./node_modules/react-bootstrap";
+import { useDispatch, useSelector } from "./node_modules/react-redux";
+import Form from "./node_modules/react-bootstrap/Form";
+import Container from "./node_modules/react-bootstrap/Container";
+import Button from "./node_modules/react-bootstrap/Button";
+import { Row } from "./node_modules/react-bootstrap";
+import { useHistory, Link } from "./node_modules/react-router-dom";
+import { Formik } from "./node_modules/formik";
+import * as Yup from "./node_modules/yup";
 
 import { selectToken, selectUser } from "../../store/user/selectors";
 import {
-  postNewRequest,
+  postNewRsvp,
   fetchUser,
-  addFriendsToRequest,
-  addRequest,
-} from "../../store/addRequests/actions";
+  addFriendsToRsvp,
+  addRsvp,
+} from "../../store/addRsvp/actions";
 import MessageBox from "../../components/MessageBox/index";
 import "./index.css";
-import { selectNewRequest } from "../../store/addRequests/selectors";
+import { selectNewRsvp } from "../../store/addRsvp/selectors";
 
 // Yup Schema
 const validationSchema = Yup.object().shape({
@@ -26,7 +26,7 @@ const validationSchema = Yup.object().shape({
   start_at: Yup.string().required("*start time is required"),
 });
 
-export default function AddRequest() {
+export default function AddRsvp() {
   const today = new Date().toISOString().split("T", 1)[0];
   const [friends, setFriends] = useState([]);
   const [email, setEmail] = useState("");
@@ -36,7 +36,7 @@ export default function AddRequest() {
   console.log(12, token);
 
   const user = useSelector(selectUser);
-  const { request = {}, newUser = {} } = useSelector(selectNewRequest) || {};
+  const { rsvp = {}, newUser = {} } = useSelector(selectNewRsvp) || {};
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -51,7 +51,7 @@ export default function AddRequest() {
     }
   };
 
-  function addRequest(values) {
+  function addRsvp(values) {
     console.log(
       "date:",
       typeof values.date,
@@ -64,15 +64,15 @@ export default function AddRequest() {
     data.append("start start_at", values.start_at);
     console.log("data:", data);
 
-    dispatch(postNewRequest(data, token));
+    dispatch(postNewRsvp(data, token));
   }
 
   function finalSubmit(event) {
     event.preventDefault();
-    dispatch(addFriendsToRequest(request.id, friends, user.id, token));
+    dispatch(addFriendsToRsvp(rsvp.id, friends, user.id, token));
 
     dispatch({
-      type: "CLEAR_Request",
+      type: "CLEAR_RSVP",
     });
     history.push("/");
   }
@@ -99,9 +99,9 @@ export default function AddRequest() {
     }
   }, [newUser]);
 
-  console.log(11, useSelector(selectNewRequest));
+  console.log(11, useSelector(selectNewRsvp));
 
-  console.log("request:", request);
+  console.log("rsvp:", rsvp);
   console.log("newUser:", newUser);
   console.log("friends:", friends);
   return (
@@ -124,7 +124,7 @@ export default function AddRequest() {
               // Simulate submitting to database, shows us values submitted, resets form
               setTimeout(() => {
                 //alert(JSON.stringify(values, null, 2));
-                addRequest(values);
+                addRsvp(values);
                 resetForm();
                 setSubmitting(false);
               }, 500);
@@ -192,7 +192,7 @@ export default function AddRequest() {
                 </p>
               ))
             : null}
-          {Object.entries(request).length !== 0 ? (
+          {Object.entries(rsvp).length !== 0 ? (
             <Form>
               <Form.Group as={Row}>
                 <Form.Label>

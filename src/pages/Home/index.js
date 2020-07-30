@@ -8,17 +8,16 @@ import { Icon } from "leaflet";
 import Container from "react-bootstrap/Container";
 import Carousel from "react-bootstrap/Carousel";
 
-import { GiKnifeFork } from "react-icons/gi";
-
 import { selectRestaurants } from "../../store/restaurants/selectors";
 import { fetchRestaurants } from "../../store/restaurants/actions";
+import { selectUserId } from "../../store/user/selectors";
 
 import "./index.css";
 import { Jumbotron } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 
 export const icon = new Icon({
-  iconUrl: <GiKnifeFork />,
+  iconUrl: "R.png",
   iconSize: [25, 25],
 });
 
@@ -32,6 +31,9 @@ export default function Home() {
   }, []);
 
   const restaurants = useSelector(selectRestaurants) || [];
+  const LoggedInUserId = useSelector(selectUserId);
+
+  console.log(123, LoggedInUserId);
 
   const goToRestaurant = (id) => {
     history.push(`/restaurants/${id}`);
@@ -55,11 +57,13 @@ export default function Home() {
           </Carousel.Item>
         </Carousel>
       </Jumbotron>
-      <Card size="lg" style={{ background: "#efefef" }}>
-        <h1> Search & Find </h1>
-      </Card>
+      <div>
+        <Card size="lg" style={{ background: "#e7e1d3" }}>
+          <h1> Search & Find </h1>
+        </Card>
+      </div>
       <img src="R22.png" />
-      <Card border="light" style={{ background: "#efefef" }}>
+      <Card>
         <Map center={[52.370216, 4.895168]} zoom={12}>
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

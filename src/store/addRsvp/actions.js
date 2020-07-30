@@ -1,9 +1,9 @@
 import axios from "axios";
 import { apiUrl } from "../../config/constants";
 
-export function addRequest(data) {
+export function addRsvp(data) {
   return {
-    type: "ADD_REQUEST",
+    type: "ADD_RSVP",
     payload: data,
   };
 }
@@ -15,14 +15,14 @@ export function addUser(data) {
   };
 }
 
-export function postNewRequest(data, token) {
+export function postNewRsvp(data, token) {
   console.log("data in action:", data);
   return async function thunk(dispatch, getState) {
     axios
-      .post(`${apiUrl}/requests`, data, {
+      .post(`${apiUrl}/rsvp`, data, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((res) => dispatch(addRequest(res.data)))
+      .then((res) => dispatch(addRsvp(res.data)))
       .catch((err) => console.log(err));
   };
 }
@@ -43,12 +43,12 @@ export function fetchUser(email, token) {
   };
 }
 
-export function addFriendsToRequest(requestId, friends, userId, token) {
+export function addFriendsToRsvp(rsvpId, friends, userId, token) {
   return async function thunk(dispatch, getState) {
     const output = await axios.post(
       `${apiUrl}/${userId}`,
       {
-        requestId,
+        rsvpId,
         friends,
       },
       {

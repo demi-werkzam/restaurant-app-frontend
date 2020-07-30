@@ -55,7 +55,7 @@ export default function UserDetails() {
               return <Liked key={id} data={restaurant} />;
             })}
         </Tab>
-        <Tab eventKey="requested" title="Requested"></Tab>
+        <Tab eventKey="rsvp" title="Rsvp"></Tab>
       </Tabs>
     </Container>
   );

@@ -35,8 +35,8 @@ export default function RestaurantCard(props) {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const goToAddRequest = () => {
-    history.push(`/requests`);
+  const goToAddRsvp = () => {
+    history.push(`/rsvp`);
   };
 
   const visitedCheck = visited ? (
@@ -111,7 +111,7 @@ export default function RestaurantCard(props) {
                 <span role="img">{likedCheck}</span>
               </button>
             )}
-            <Button variant="dark" size="lg" onClick={goToAddRequest}>
+            <Button variant="dark" size="lg" onClick={goToAddRsvp}>
               Invite others
             </Button>
           </Card>
@@ -128,9 +128,9 @@ export default function RestaurantCard(props) {
               <Card.Body>
                 <Card.Text className="text-right">
                   <h5>Want to book a table?</h5>
-                  <button className="btn" href={`${website}`}>
+                  <Button variant="dark" className="btn" href={`${website}`}>
                     {`Visit ${name}'s website here!`}
-                  </button>
+                  </Button>
                 </Card.Text>
               </Card.Body>
             </Card>
