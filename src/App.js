@@ -3,6 +3,7 @@ import "./App.css";
 
 import { Switch, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import Card from "react-bootstrap/Card";
 
 import Navigation from "./components/Navigation";
 import MessageBox from "./components/MessageBox";
@@ -15,14 +16,11 @@ import UserDetails from "./pages/UserDetails";
 import AddRsvp from "./pages/AddRsvp";
 import AddRestaurant from "./pages/AddRestaurant";
 
-import { selectAppLoading } from "./store/appState/selectors";
 import { getUserWithStoredToken } from "./store/user/actions";
-import { selectUserId } from "./store/user/selectors";
+import { fetchRestaurants } from "./store/restaurants/actions";
 
 function App() {
   const dispatch = useDispatch();
-
-  const id = useSelector(selectUserId);
 
   useEffect(() => {
     dispatch(getUserWithStoredToken());
@@ -31,6 +29,7 @@ function App() {
   return (
     <div className="App">
       <Navigation />
+      <Card border="light" style={{ padding: ".5rem 1rem" }} />
       <MessageBox />
       <Switch>
         <Route exact path="/" component={Home} />

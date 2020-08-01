@@ -1,24 +1,7 @@
-.visitedButton {
+.Button-group {
   float: left;
   background: none;
   border: none;
   left: 0;
   width: 120px;
-}
-
-.emojiButton:focus {
-  outline: none;
-}
-.heartButton {
-  float: right;
-  background: none;
-  border: none;
-  width: 120px;
-}
-
-.cardLeft {
-  left: 30px;
-  width: 400px;
-  height: 200px;
-  border-bottom-color: #444;
 }

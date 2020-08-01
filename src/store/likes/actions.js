@@ -2,20 +2,19 @@ import axios from "axios";
 import { apiUrl } from "../../config/constants";
 import { appLoading, appDoneLoading } from "../appState/actions";
 
-export function visitsFetched(data) {
+export function LikesFetched(data) {
   return {
-    type: "VISITS_FETCHED",
+    type: "LIKES_FETCHED",
     payload: data,
   };
 }
 
-export const addVisit = (id, userid, token) => {
+export const addLike = (id, userid, token) => {
   return async (dispatch, getState) => {
     dispatch(appLoading());
     try {
-      const response = await axios.post(`${apiUrl}/visits/${userid}/${id}`);
-      console.log("inside action", response.data);
-      dispatch(fetchVisitsWithUser);
+      const response = await axios.post(`${apiUrl}/likes/${userid}/${id}`);
+      dispatch(fetchLikesWithUser);
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
@@ -28,7 +27,7 @@ export const addVisit = (id, userid, token) => {
   };
 };
 
-export const deleteVisit = (id, userid, token) => {
+export const deleteLike = (id, userid, token) => {
   return async (dispatch, getState) => {
     dispatch(appLoading());
     try {
@@ -37,7 +36,7 @@ export const deleteVisit = (id, userid, token) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      dispatch(fetchVisitsWithUser);
+      dispatch(fetchLikesWithUser);
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
@@ -50,13 +49,13 @@ export const deleteVisit = (id, userid, token) => {
   };
 };
 
-export const fetchVisitsWithUser = (userId, token) => {
+export const fetchLikesWithUser = (userId, token) => {
   return async (dispatch, getState) => {
-    const output = await axios.get(`${apiUrl}/visits/${userId}`, {
+    const output = await axios.get(`${apiUrl}/likes/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    dispatch(visitsFetched(output.data));
+    dispatch(LikesFetched(output.data));
   };
 };

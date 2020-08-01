@@ -25,10 +25,6 @@ export default function Navigation() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav style={{ width: "100%" }} fill></Nav>
-        <NavbarItem
-          path={`/home/users/${userId}/restaurant`}
-          linkText="Add Restaurant"
-        />
         {loginLogoutControls}
       </Navbar.Collapse>
     </Navbar>
