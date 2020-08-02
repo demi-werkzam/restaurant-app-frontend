@@ -1,0 +1,17 @@
+.leaflet-container {
+  width: 100%;
+  height: 60vh;
+}
+
+.color-jumbotron {
+  background-color: #b99c96 (185, 156, 150);
+}
+
+.slide-show {
+  width: 100%;
+  height: 30vh;
+}
+
+.btn {
+  background-color: transparent;
+}

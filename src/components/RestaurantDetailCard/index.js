@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Jumbotron } from "react-bootstrap";
@@ -14,8 +13,7 @@ import { FaInstagramSquare } from "react-icons/fa";
 import "./index.css";
 import { deleteVisit, addVisit } from "../../store/visits/actions";
 import { deleteLike, addLike } from "../../store/likes/actions";
-import { selectUserId, selectToken } from "../../store/user/selectors";
-import { selectVisits } from "../../store/visits/selectors";
+import { selectUserId } from "../../store/user/selectors";
 import RestaurantMap from "../RestaurantMap";
 
 export default function RestaurantCard(props) {
@@ -30,16 +28,11 @@ export default function RestaurantCard(props) {
   } = props.data;
   const { token, userVisits, userLikes } = props;
 
+  const dispatch = useDispatch();
   const [visited, setVisit] = useState(false);
   const [liked, setLike] = useState(false);
 
   const userid = useSelector(selectUserId);
-
-  const history = useHistory();
-  const dispatch = useDispatch();
-  const visits = useSelector(selectVisits) || [];
-
-  console.log(userLikes);
 
   const userVisitsFiltered =
     userVisits &&

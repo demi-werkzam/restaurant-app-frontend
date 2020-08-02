@@ -11,7 +11,7 @@ export default function Visited(props) {
   const { name, id, createdAt } = props.data;
 
   return (
-    <Card style={{ width: "18rem" }}>
+    <Card style={{ width: "20rem" }}>
       <Card.Body>
         <Card.Title>{`${name}`}</Card.Title>
       </Card.Body>

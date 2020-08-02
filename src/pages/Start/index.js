@@ -13,8 +13,6 @@ import { fetchRestaurants } from "../../store/restaurants/actions";
 import { selectUserId, selectToken } from "../../store/user/selectors";
 
 import "./index.css";
-
-import { Jumbotron } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 
 export const icon = new Icon({
@@ -22,7 +20,7 @@ export const icon = new Icon({
   iconSize: [25, 25],
 });
 
-export default function Home() {
+export default function Start() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [activeRestaurant, setActiveRestaurant] = useState(null);
@@ -35,34 +33,17 @@ export default function Home() {
   const LoggedInUserId = useSelector(selectUserId);
   const token = useSelector(selectToken);
 
-  const goToRestaurant = (id) => {
-    history.push(`/restaurants/${id}`);
+  const goToLogin = () => {
+    history.push(`/login`);
   };
 
   return (
     <Container>
-      <Jumbotron fluid style={{ background: "#ffffff" }}>
-        <Carousel className="slide-show">
-          <Carousel.Item>
-            <Carousel.Caption>
-              <h1>De Ysbreker</h1>
-            </Carousel.Caption>
-            <img className=" w-50" src="de_ysbreker.png" alt="First slide" />
-          </Carousel.Item>
-          <Carousel.Item>
-            <Carousel.Caption>
-              <h1>Water en Brood</h1>
-            </Carousel.Caption>
-            <img src="water_en_brood.png" alt="Second slide" />
-          </Carousel.Item>
-        </Carousel>
-      </Jumbotron>
       <div>
         <Card size="lg" style={{ background: "#e7e1d3" }}>
           <h1> Search & Find </h1>
         </Card>
       </div>
-      <img src="../../R22.png" />
       <Card>
         <Map center={[52.370216, 4.895168]} zoom={12}>
           <TileLayer
@@ -90,11 +71,8 @@ export default function Home() {
               <div>
                 <h6>{`${activeRestaurant.name}`} </h6>
                 <hr></hr>
-                <p>Want to know more about this restaurant?</p>
-                <button
-                  className="btn"
-                  onClick={() => goToRestaurant(activeRestaurant.id)}
-                >
+                <p>Login to find out more about this Restaurant?</p>
+                <button className="btn" onClick={goToLogin}>
                   Click here!
                 </button>
               </div>
@@ -102,6 +80,7 @@ export default function Home() {
           )}
         </Map>
       </Card>
+      <img src="../../R_b.png" />
     </Container>
   );
 }

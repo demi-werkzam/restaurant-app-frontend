@@ -1,9 +1,10 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { logOut } from "../../store/user/actions";
 
+import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
 import NavbarItem from "./NavbarItem";
@@ -14,6 +15,11 @@ export default function LoggedIn({ id }) {
   const dispatch = useDispatch();
   return (
     <>
+      <Navbar.Brand as={NavLink} to="/home">
+        R&S
+      </Navbar.Brand>
+      <Nav style={{ width: "15000%" }} fill></Nav>
+
       <NavbarItem
         className="nav-link-color "
         path={`/home/users/${id}`}

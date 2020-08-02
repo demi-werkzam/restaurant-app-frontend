@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Map, Marker, Popup, TileLayer } from "react-leaflet";
+import React from "react";
+import { Map, Marker, TileLayer } from "react-leaflet";
 import { Icon } from "leaflet";
 
 import "./index.css";
 
 export const icon = new Icon({
   iconUrl: "../../R.png",
-  iconSize: [25, 25],
+  iconSize: [35, 35],
 });
 
 export default function RestaurantMap(props) {

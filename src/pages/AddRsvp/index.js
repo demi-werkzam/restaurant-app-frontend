@@ -74,7 +74,7 @@ export default function AddRsvp() {
     dispatch({
       type: "CLEAR_RSVP",
     });
-    history.push("/");
+    history.push("/home");
   }
 
   useEffect(() => {
