@@ -13,7 +13,6 @@ import { fetchRestaurants } from "../../store/restaurants/actions";
 import { selectUserId, selectToken } from "../../store/user/selectors";
 
 import "./index.css";
-import { Jumbotron } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 
 export const icon = new Icon({

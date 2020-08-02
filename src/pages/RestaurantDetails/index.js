@@ -51,8 +51,6 @@ export default function RestaurantDetails() {
   const visits = useSelector(selectVisits) || [];
   const likes = useSelector(selectLikes) || [];
 
-  console.log(1234, visits);
-
   const filteredRestaurants = restaurants.filter((restaurant) => {
     return restaurant.id === parseInt(id, 10);
   });
@@ -64,8 +62,6 @@ export default function RestaurantDetails() {
   const filteredLikes = likes.filter((like) => {
     return like.userId === userId;
   });
-
-  console.log(1298, filteredVisits);
 
   return (
     <Container>
