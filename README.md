@@ -1,6 +1,6 @@
 ## ✨ `Search Restaurant App` ✨
 
-Click here to see the deployed version 👍
+Click [here](https://infallible-nightingale-c43c6d.netlify.app/) to see the deployed version 👍
 
 ## `Intro` 
 Hi I am Demi. A foodie living in Amsterdam. As a food lover going out to restaurants to eat is one of my favorite things. 
