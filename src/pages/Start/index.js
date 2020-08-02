@@ -6,7 +6,6 @@ import { Map, Marker, TileLayer, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
 
 import Container from "react-bootstrap/Container";
-import Carousel from "react-bootstrap/Carousel";
 
 import { selectRestaurants } from "../../store/restaurants/selectors";
 import { fetchRestaurants } from "../../store/restaurants/actions";

@@ -8,24 +8,16 @@ import { Icon } from "leaflet";
 import { Jumbotron } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 
-import {
-  selectRestaurants,
-  selectUserIdRestaurants,
-} from "../../store/restaurants/selectors";
+import { selectRestaurants } from "../../store/restaurants/selectors";
 import {
   selectUserId,
   selectUserName,
   selectToken,
 } from "../../store/user/selectors";
-import {
-  fetchRestaurants,
-  fetchRestaurantsWithUser,
-} from "../../store/restaurants/actions";
+import { fetchRestaurantsWithUser } from "../../store/restaurants/actions";
 import { fetchVisitsWithUser } from "../../store/visits/actions";
 import { fetchLikesWithUser } from "../../store/likes/actions";
 import Visited from "../../components/Visted";
@@ -80,7 +72,7 @@ export default function UserDetails() {
 
   return (
     <Container>
-      <Jumbotron style={{ background: "#efefef" }}>
+      <Jumbotron fluid style={{ background: "#b99c96" }}>
         <h1>{` Hi ${userName}`}</h1>
       </Jumbotron>
       <div>

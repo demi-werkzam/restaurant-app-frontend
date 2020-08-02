@@ -16,7 +16,7 @@ import { deleteLike, addLike } from "../../store/likes/actions";
 import { selectUserId } from "../../store/user/selectors";
 import RestaurantMap from "../RestaurantMap";
 
-export default function RestaurantCard(props) {
+export default function RestaurantDetailCard(props) {
   const {
     id,
     name,
@@ -84,7 +84,12 @@ export default function RestaurantCard(props) {
 
   return (
     <Container>
-      <Jumbotron style={{ background: "#efefef" }}>
+      <Jumbotron
+        fluid
+        style={{
+          background: "#b99c96",
+        }}
+      >
         <h1>{`${name}`}</h1>
       </Jumbotron>
       <Row>
