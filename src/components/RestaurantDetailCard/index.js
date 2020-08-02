@@ -71,9 +71,9 @@ export default function RestaurantDetailCard(props) {
 
   const handleLike = (event) => {
     if (userLikesFiltered.length > 0) {
-      dispatch(addLike(id, userid, token));
-    } else {
       dispatch(deleteLike(id, userid, token));
+    } else {
+      dispatch(addLike(id, userid, token));
     }
   };
 
