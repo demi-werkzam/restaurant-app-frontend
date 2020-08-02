@@ -1,14 +1,9 @@
 import React from "react";
-import { restaurantsFetched } from "../../store/restaurants/actions";
 
-import Container from "react-bootstrap/Container";
-import CardColumns from "react-bootstrap/CardColumns";
 import Card from "react-bootstrap/Card";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 
 export default function Visited(props) {
-  const { name, id, createdAt } = props.data;
+  const { name, createdAt } = props.data;
 
   return (
     <Card style={{ width: "20rem" }}>
