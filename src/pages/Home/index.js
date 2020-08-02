@@ -10,14 +10,14 @@ import Carousel from "react-bootstrap/Carousel";
 
 import { selectRestaurants } from "../../store/restaurants/selectors";
 import { fetchRestaurants } from "../../store/restaurants/actions";
-import { selectUserId } from "../../store/user/selectors";
+import { selectUserId, selectToken } from "../../store/user/selectors";
 
 import "./index.css";
 import { Jumbotron } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 
 export const icon = new Icon({
-  iconUrl: "R.png",
+  iconUrl: "../../R.png",
   iconSize: [25, 25],
 });
 
@@ -32,8 +32,7 @@ export default function Home() {
 
   const restaurants = useSelector(selectRestaurants) || [];
   const LoggedInUserId = useSelector(selectUserId);
-
-  console.log(123, LoggedInUserId);
+  const token = useSelector(selectToken);
 
   const goToRestaurant = (id) => {
     history.push(`/restaurants/${id}`);
@@ -62,7 +61,7 @@ export default function Home() {
           <h1> Search & Find </h1>
         </Card>
       </div>
-      <img src="R22.png" />
+      <img src="../../R22.png" />
       <Card>
         <Map center={[52.370216, 4.895168]} zoom={12}>
           <TileLayer
@@ -77,6 +76,7 @@ export default function Home() {
                 onClick={() => {
                   setActiveRestaurant(restaurant);
                 }}
+                icon={icon}
               />
             ))}
           {activeRestaurant && (

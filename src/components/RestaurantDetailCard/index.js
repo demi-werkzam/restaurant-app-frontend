@@ -151,7 +151,7 @@ export default function RestaurantCard(props) {
                     {visitedCheck}
                   </button>
                 )}
-                {visited && (
+                {userVisitsFiltered && (
                   <button
                     className="Button-group"
                     onClick={(event) => handleLike(event.target)}
@@ -174,6 +174,9 @@ export default function RestaurantCard(props) {
           </CardGroup>
         </Col>
       </Row>
+
+      <img src="../R22.png" />
+
       <Card border="light" style={{ padding: ".5rem 1rem" }} />
       <RestaurantMap id={id} latitude={latitude} longitude={longitude} />
     </Container>

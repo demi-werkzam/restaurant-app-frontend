@@ -17,7 +17,7 @@ export default function Visited(props) {
       </Card.Body>
       <Card.Footer>
         <small className="text-muted">
-          {`you went to this restaurant on ${createdAt}`}
+          {`you went to this restaurant on ${createdAt.split("T")[0]}`}
         </small>
       </Card.Footer>
     </Card>

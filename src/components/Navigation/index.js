@@ -20,7 +20,7 @@ export default function Navigation() {
   return (
     <Navbar variant="light" className="nav-color" expand="lg">
       <Navbar.Brand as={NavLink} to="/">
-        <img src="R.png" />
+        R&S
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">

@@ -33,6 +33,11 @@ import UserRestaurants from "../../components/UserRestaurants";
 
 import "./index.css";
 
+export const icon = new Icon({
+  iconUrl: "../../R.png",
+  iconSize: [25, 25],
+});
+
 export default function UserDetails() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -78,59 +83,55 @@ export default function UserDetails() {
       <Jumbotron style={{ background: "#efefef" }}>
         <h1>{` Hi ${userName}`}</h1>
       </Jumbotron>
+      <div>
+        <Card size="lg" style={{ background: "#e7e1d3" }}>
+          <h1> Your Favourite Restaurants </h1>
+        </Card>
+      </div>
+      <img src="../../R22.png" />
+      <Map center={[52.370216, 4.895168]} zoom={12}>
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        />
+        {restaurants &&
+          restaurants.map((restaurant) => (
+            <Marker
+              key={restaurant.id}
+              position={[restaurant.latitude, restaurant.longitude]}
+              onClick={() => {
+                setActiveRestaurant(restaurant);
+              }}
+              icon={icon}
+            />
+          ))}
+        {activeRestaurant && (
+          <Popup
+            position={[activeRestaurant.latitude, activeRestaurant.longitude]}
+            onClose={() => {
+              setActiveRestaurant(null);
+            }}
+          >
+            <div>
+              <h6>{`${activeRestaurant.name}`} </h6>
+              <hr></hr>
+              <p>Want to know more about this restaurant?</p>
+              <button
+                className="btn"
+                onClick={() => goToRestaurant(activeRestaurant.id)}
+              >
+                Click here!
+              </button>
+            </div>
+          </Popup>
+        )}
+      </Map>
       <Tabs defaultActiveKey="visited">
         <Tab eventKey="visited" title="Visited">
           {restaurants &&
             restaurants.map((restaurant) => (
               <Visited key={restaurant.id} data={restaurant} />
             ))}
-        </Tab>
-        <Tab eventKey="liked" title="Favorites">
-          <div>
-            {
-              <Card>
-                <Map center={[52.370216, 4.895168]} zoom={12}>
-                  <TileLayer
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                  />
-                  {restaurants &&
-                    restaurants.map((restaurant) => (
-                      <Marker
-                        key={restaurant.id}
-                        position={[restaurant.latitude, restaurant.longitude]}
-                        onClick={() => {
-                          setActiveRestaurant(restaurant);
-                        }}
-                      />
-                    ))}
-                  {activeRestaurant && (
-                    <Popup
-                      position={[
-                        activeRestaurant.latitude,
-                        activeRestaurant.longitude,
-                      ]}
-                      onClose={() => {
-                        setActiveRestaurant(null);
-                      }}
-                    >
-                      <div>
-                        <h6>{`${activeRestaurant.name}`} </h6>
-                        <hr></hr>
-                        <p>Want to know more about this restaurant?</p>
-                        <button
-                          className="btn"
-                          onClick={() => goToRestaurant(activeRestaurant.id)}
-                        >
-                          Click here!
-                        </button>
-                      </div>
-                    </Popup>
-                  )}
-                </Map>
-              </Card>
-            }
-          </div>
         </Tab>
         <Tab eventKey="your-restaurants" title="Restaurants">
           {restaurants &&

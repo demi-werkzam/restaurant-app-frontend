@@ -20,7 +20,7 @@ export default function UserRestaurants(props) {
       </Card.Body>
       <Card.Footer>
         <small className="text-muted">
-          {`you added this restaurant on ${createdAt}`}
+          {`you added this restaurant on ${createdAt.split("T")[0]}`}
         </small>
       </Card.Footer>
     </Card>
