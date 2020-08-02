@@ -1,3 +1,72 @@
+## `Search Restaurant App`
+
+Click here to see the deployed version
+
+## `Intro` 
+Hi I am Demi. A foodie living in Amsterdam. As a food lover going out to restaurants to eat is one of my favorite things. 
+This is a the first version of the app, more features will be added. You can find them here. 
+
+## `The Search Restaurant App`
+As a lover of food and restaurants I chose to dedicate my portfolio project to other people in Amsterdam who love the same things.  
+Users can look for nice restauants in Amserdam can use the app to search for restaurants, keep a list of restaurants that they have been to, review the restaurants by liking them and inviting other users to out to a restaurant. 
+
+## `Technology` 
+
+- React
+- Redux
+- Formik
+- Yup
+- React-Leaflet
+- React-Bootstrap
+- Express
+- REST API
+- Sequelize
+- CSS
+
+## `Goals`
+- Practise fullstack development;
+- Apply what I have learned in Codaisseur's bootcamp;
+- Practise learning new technologies on my own;
+- Showcase development approach of using wireframes and user stories;
+- practise proper git usage, commits and branching.
+
+## `Demo` 
+
+#### `User stories and wireframe` 
+
+- As a person looking for a restaurant to eat breakfast, lunch or dinner in Amsterdam:
+
+
+  - I want to be able to see the restaurants on a map, so I can chose which restaurant I want to go to;
+
+
+  - I want to be able to click on the restaurant and see the contact info of the restaurant and the location.
+
+
+- As a user of the restaurant searching app:
+  
+
+  - I want to be able to login;
+  
+  - I want to show that I went to a restaurant;
+  
+  - I want to like a restaurant I have visited;
+  
+  - I want to be able to see a list of the restaurants that I've liked and the restaurants that I have been to;
+  
+  - I want to be able to add a new restaurant;
+  
+  - I want to be able to see a list of restaurants that I have added.
+
+- Wireframe 
+ (URL)
+ 
+  ## `Server Repository`
+ 
+The repository for the backend can be found here. This is a RESTful API using Express.js. The database is built using Postgres. Here is the data model. Object-relational mapping is done using Sequelize.
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
