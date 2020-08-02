@@ -22,10 +22,7 @@ import {
   selectUserName,
   selectToken,
 } from "../../store/user/selectors";
-import {
-  fetchRestaurants,
-  fetchRestaurantsWithUser,
-} from "../../store/restaurants/actions";
+import { fetchRestaurantsWithUser } from "../../store/restaurants/actions";
 import { fetchVisitsWithUser } from "../../store/visits/actions";
 import { fetchLikesWithUser } from "../../store/likes/actions";
 import Visited from "../../components/Visted";
