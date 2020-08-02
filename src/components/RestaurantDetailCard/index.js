@@ -29,45 +29,40 @@ export default function RestaurantDetailCard(props) {
   const { token, userVisits, userLikes } = props;
 
   const dispatch = useDispatch();
-  const [visited, setVisit] = useState(false);
-  const [liked, setLike] = useState(false);
-
   const userid = useSelector(selectUserId);
 
-  const userVisitsFiltered =
-    userVisits &&
-    userVisits.filter((userVisit) => {
-      return userVisit.restaurantId === id && true;
-    });
+  const userVisitsFiltered = userVisits.filter((userVisit) => {
+    return userVisit.restaurantId === id;
+  });
 
-  const userLikesFiltered =
-    userLikes &&
-    userLikes.filter((userLike) => {
-      return userLike.restaurantId === id && true;
-    });
+  const userLikesFiltered = userLikes.filter((userLike) => {
+    return userLike.restaurantId === id;
+  });
 
-  const visitedCheck = userVisitsFiltered ? (
-    <span role="img" aria-label="check mark button">
-      ✅
-    </span>
-  ) : (
-    <span role="img" aria-label="white large square">
-      ⬜
-    </span>
-  );
+  const visitedCheck =
+    userVisitsFiltered.length > 0 ? (
+      <span role="img" aria-label="check mark button">
+        ✅
+      </span>
+    ) : (
+      <span role="img" aria-label="white large square">
+        ⬜
+      </span>
+    );
 
-  const likedCheck = userLikesFiltered ? (
-    <span role="img" aria-label="sparkling heart">
-      💖
-    </span>
-  ) : (
-    <span role="img" aria-label="white heart">
-      🤍
-    </span>
-  );
+  const likedCheck =
+    userLikesFiltered.length > 0 ? (
+      <span role="img" aria-label="sparkling heart">
+        💖
+      </span>
+    ) : (
+      <span role="img" aria-label="white heart">
+        🤍
+      </span>
+    );
 
   const handleVisit = (event) => {
-    if (userVisitsFiltered) {
+    if (userVisitsFiltered.length > 0) {
       dispatch(deleteVisit(id, userid, token));
     } else {
       dispatch(addVisit(id, userid, token));
@@ -75,7 +70,7 @@ export default function RestaurantDetailCard(props) {
   };
 
   const handleLike = (event) => {
-    if (liked) {
+    if (userLikesFiltered.length > 0) {
       dispatch(addLike(id, userid, token));
     } else {
       dispatch(deleteLike(id, userid, token));
@@ -149,7 +144,7 @@ export default function RestaurantDetailCard(props) {
                     {visitedCheck}
                   </button>
                 )}
-                {userVisitsFiltered && (
+                {userVisitsFiltered.length > 0 && (
                   <button
                     className="Button-group"
                     onClick={(event) => handleLike(event.target)}

@@ -14,7 +14,7 @@ export const addLike = (id, userid, token) => {
     dispatch(appLoading());
     try {
       const response = await axios.post(`${apiUrl}/likes/${userid}/${id}`);
-      dispatch(fetchLikesWithUser);
+      dispatch(fetchLikesWithUser(userid, token));
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
@@ -36,7 +36,7 @@ export const deleteLike = (id, userid, token) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      dispatch(fetchLikesWithUser);
+      dispatch(fetchLikesWithUser(userid, token));
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
