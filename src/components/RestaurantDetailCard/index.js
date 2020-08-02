@@ -29,17 +29,11 @@ export default function RestaurantDetailCard(props) {
   const { token, userVisits, userLikes } = props;
 
   const dispatch = useDispatch();
-  const [visited, setVisit] = useState(false);
-  const [liked, setLike] = useState(false);
-
   const userid = useSelector(selectUserId);
 
   const userVisitsFiltered = userVisits.filter((userVisit) => {
     return userVisit.restaurantId === id;
   });
-  console.log(12, userVisitsFiltered);
-
-  // console.log(1112, userVisits);
 
   const userLikesFiltered = userLikes.filter((userLike) => {
     return userLike.restaurantId === id;
