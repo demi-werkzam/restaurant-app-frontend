@@ -19,7 +19,7 @@ export default function Navigation() {
 
   return (
     <Navbar variant="light" className="nav-color" expand="lg">
-      <Navbar.Brand as={NavLink} to="/">
+      <Navbar.Brand as={NavLink} to="/home">
         R&S
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
