@@ -21,7 +21,6 @@ Users can look for nice restauants in Amserdam can use the app to search for res
 - Express
 - REST API
 - Sequelize
-- CSS
 
 *🔥 new technologies used in this project
 
