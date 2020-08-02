@@ -202,7 +202,12 @@ export default function AddRestaurant() {
                   <div className="error-message">{errors.longitude}</div>
                 )}
               </Form.Group>
-              <Button variant="dark" type="submit" disabled={isSubmitting}>
+              <Button
+                style={{ background: "black" }}
+                variant="dark"
+                type="submit"
+                disabled={isSubmitting}
+              >
                 Submit
               </Button>
             </Form>
