@@ -15,7 +15,7 @@ export const addVisit = (id, userid, token) => {
     try {
       const response = await axios.post(`${apiUrl}/visits/${userid}/${id}`);
       console.log("inside action", response.data);
-      dispatch(fetchVisitsWithUser);
+      dispatch(fetchVisitsWithUser(userid, token));
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
@@ -37,7 +37,7 @@ export const deleteVisit = (id, userid, token) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      dispatch(fetchVisitsWithUser);
+      dispatch(fetchVisitsWithUser(userid, token));
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
