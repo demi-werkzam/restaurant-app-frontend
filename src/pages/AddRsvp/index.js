@@ -224,7 +224,7 @@ export default function AddRsvp() {
           ) : null}
           <Form>
             <Form.Group as={Row} className="mt-5">
-              <Button variant="primary" type="submit" onClick={finalSubmit}>
+              <Button variant="dark" type="submit" onClick={finalSubmit}>
                 submit
               </Button>
               <MessageBox />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -10,11 +10,12 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import CardGroup from "react-bootstrap/CardGroup";
 import { FaInstagramSquare } from "react-icons/fa";
-import { AiFillPhone } from "react-icons/ai";
 
 import "./index.css";
-import { updateVisit, addVisit } from "../../store/visits/actions";
-import { updateLike, addLike } from "../../store/like/actions";
+import { deleteVisit, addVisit } from "../../store/visits/actions";
+import { deleteLike, addLike } from "../../store/likes/actions";
+import { selectUserId, selectToken } from "../../store/user/selectors";
+import { selectVisits } from "../../store/visits/selectors";
 import RestaurantMap from "../RestaurantMap";
 
 export default function RestaurantCard(props) {
@@ -27,19 +28,32 @@ export default function RestaurantCard(props) {
     instagram,
     website,
   } = props.data;
-  const { token } = props;
+  const { token, userVisits, userLikes } = props;
 
   const [visited, setVisit] = useState(false);
   const [liked, setLike] = useState(false);
 
+  const userid = useSelector(selectUserId);
+
   const history = useHistory();
   const dispatch = useDispatch();
+  const visits = useSelector(selectVisits) || [];
 
-  const goToAddRsvp = () => {
-    history.push(`/rsvp`);
-  };
+  console.log(userLikes);
 
-  const visitedCheck = visited ? (
+  const userVisitsFiltered =
+    userVisits &&
+    userVisits.filter((userVisit) => {
+      return userVisit.restaurantId === id && true;
+    });
+
+  const userLikesFiltered =
+    userLikes &&
+    userLikes.filter((userLike) => {
+      return userLike.restaurantId === id && true;
+    });
+
+  const visitedCheck = userVisitsFiltered ? (
     <span role="img" aria-label="check mark button">
       ✅
     </span>
@@ -49,7 +63,7 @@ export default function RestaurantCard(props) {
     </span>
   );
 
-  const likedCheck = liked ? (
+  const likedCheck = userLikesFiltered ? (
     <span role="img" aria-label="sparkling heart">
       💖
     </span>
@@ -59,21 +73,19 @@ export default function RestaurantCard(props) {
     </span>
   );
 
-  const addVisit = (id, token) => {
-    if (!visited) {
-      dispatch(updateVisit(setVisit(!visited)));
-    }
-    if (visited) {
-      dispatch(addVisit(setVisit(visited)));
+  const handleVisit = (event) => {
+    if (userVisitsFiltered) {
+      dispatch(deleteVisit(id, userid, token));
+    } else {
+      dispatch(addVisit(id, userid, token));
     }
   };
 
-  const addLike = (id, token) => {
-    if (!liked) {
-      dispatch(updateLike(setLike(!liked)));
-    }
+  const handleLike = (event) => {
     if (liked) {
-      dispatch(addLike(setLike(liked)));
+      dispatch(addLike(id, userid, token));
+    } else {
+      dispatch(deleteLike(id, userid, token));
     }
   };
 
@@ -84,7 +96,9 @@ export default function RestaurantCard(props) {
       </Jumbotron>
       <Row>
         <Col>
-          <Card>
+          <Card
+            style={{ padding: ".5rem 1rem", width: "550px", margin: "auto" }}
+          >
             <Col>
               <FaInstagramSquare size="3rem" />
             </Col>
@@ -93,41 +107,24 @@ export default function RestaurantCard(props) {
               <Button variant="dark" size="lg" href={`${instagram}`}>
                 Check out their instagram
               </Button>
+              <Card border="light" style={{ padding: ".5rem 1rem" }} />
             </Col>
           </Card>
         </Col>
-        <Col>
-          <Card>
-            <Card.Text>
-              Let us know if you have visited this restaurant before
-            </Card.Text>
-            {token && (
-              <button className="visitedButton" onClick={addVisit}>
-                {visitedCheck}
-              </button>
-            )}
-            {visited && (
-              <button className="heartButton" onClick={addLike}>
-                <span role="img">{likedCheck}</span>
-              </button>
-            )}
-            <Button variant="dark" size="lg" onClick={goToAddRsvp}>
-              Invite others
-            </Button>
-          </Card>
-        </Col>
       </Row>
+      <Card border="light" style={{ padding: ".5rem 1rem" }} />
       <Row>
         <Col>
           <CardGroup>
             <Card
-              border="light"
-              style={{ background: "#b99c96" }}
-              className="text-center"
+              style={{
+                border: "40px solid #b99c96",
+              }}
             >
               <Card.Body>
-                <Card.Text className="text-right">
-                  <h5>Want to book a table?</h5>
+                <Card.Text className="text-center">
+                  Want to book a table?
+                  <Card border="light" style={{ padding: ".5rem 1rem" }} />
                   <Button variant="dark" className="btn" href={`${website}`}>
                     {`Visit ${name}'s website here!`}
                   </Button>
@@ -135,17 +132,52 @@ export default function RestaurantCard(props) {
               </Card.Body>
             </Card>
             <Card
-              border={"#b99c96"}
-              style={{ background: "#b99c96" }}
-              className="text-center"
+              style={{
+                border: "40px solid #b99c96",
+              }}
             >
               <Card.Body>
-                <Card.Text className="text-right">{`Address: ${address}`}</Card.Text>
+                {token ? (
+                  <Card.Text>
+                    Let us know if you have visited this restaurant before
+                  </Card.Text>
+                ) : (
+                  <Card.Text>
+                    Log in to keep track of the restaurants you have visited
+                  </Card.Text>
+                )}
+                {token && (
+                  <button className="Button-group" onClick={handleVisit}>
+                    {visitedCheck}
+                  </button>
+                )}
+                {userVisitsFiltered && (
+                  <button
+                    className="Button-group"
+                    onClick={(event) => handleLike(event.target)}
+                  >
+                    <span role="img">{likedCheck}</span>
+                  </button>
+                )}
+              </Card.Body>
+            </Card>
+            <Card
+              style={{
+                border: "40px solid #b99c96",
+              }}
+            >
+              <Card.Body>
+                <Card.Title>Address</Card.Title>
+                <Card.Text className="text-center">{`${address}`}</Card.Text>
               </Card.Body>
             </Card>
           </CardGroup>
         </Col>
       </Row>
+
+      <img src="../R22.png" />
+
+      <Card border="light" style={{ padding: ".5rem 1rem" }} />
       <RestaurantMap id={id} latitude={latitude} longitude={longitude} />
     </Container>
   );

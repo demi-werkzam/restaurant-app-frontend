@@ -4,6 +4,11 @@ import { Icon } from "leaflet";
 
 import "./index.css";
 
+export const icon = new Icon({
+  iconUrl: "../../R.png",
+  iconSize: [25, 25],
+});
+
 export default function RestaurantMap(props) {
   const { id, latitude, longitude } = props;
   return (
@@ -12,7 +17,7 @@ export default function RestaurantMap(props) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-      <Marker position={[latitude, longitude]} />
+      <Marker position={[latitude, longitude]} icon={icon} />
     </Map>
   );
 }
