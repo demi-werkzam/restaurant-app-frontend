@@ -15,6 +15,7 @@ import RestaurantDetails from "./pages/RestaurantDetails";
 import UserDetails from "./pages/UserDetails";
 import AddRsvp from "./pages/AddRsvp";
 import AddRestaurant from "./pages/AddRestaurant";
+import Start from "./pages/Start";
 
 import { getUserWithStoredToken } from "./store/user/actions";
 import { fetchRestaurants } from "./store/restaurants/actions";
@@ -32,7 +33,8 @@ function App() {
       <Card border="light" style={{ padding: ".5rem 1rem" }} />
       <MessageBox />
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={Start} />
+        <Route exact path="/home" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
         <Route path="/restaurants/:id" component={RestaurantDetails} />
