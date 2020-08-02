@@ -72,7 +72,7 @@ export default function UserDetails() {
 
   return (
     <Container>
-      <Jumbotron fluid style={{ background: "#ffffff" }}>
+      <Jumbotron fluid style={{ background: "#b99c96" }}>
         <h1>{` Hi ${userName}`}</h1>
       </Jumbotron>
       <div>

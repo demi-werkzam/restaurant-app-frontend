@@ -16,7 +16,7 @@ import { deleteLike, addLike } from "../../store/likes/actions";
 import { selectUserId } from "../../store/user/selectors";
 import RestaurantMap from "../RestaurantMap";
 
-export default function RestaurantCard(props) {
+export default function RestaurantDetailCard(props) {
   const {
     id,
     name,
