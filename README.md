@@ -32,6 +32,23 @@ Users can look for nice restauants in Amserdam can use the app to search for res
 - practise proper git usage, commits and branching.
 
 ## `Demo` 
+![image](https://user-images.githubusercontent.com/64919567/89122674-7da98c80-d4c9-11ea-9221-90cd5822c7f1.png)
+
+![image](https://user-images.githubusercontent.com/64919567/89122947-d11cda00-d4cb-11ea-9266-ce9ed793ac9c.png)
+
+![image](https://user-images.githubusercontent.com/64919567/89122955-eb56b800-d4cb-11ea-836b-cbd93aa26cf6.png)
+![image](https://user-images.githubusercontent.com/64919567/89123001-3ffa3300-d4cc-11ea-8875-1d289df27cb4.png)
+
+
+![image](https://user-images.githubusercontent.com/64919567/89123019-6cae4a80-d4cc-11ea-9c47-820996cf9f4c.png)
+![image](https://user-images.githubusercontent.com/64919567/89123023-7afc6680-d4cc-11ea-87e3-b9c0d8600685.png)
+
+![image](https://user-images.githubusercontent.com/64919567/89123032-8c457300-d4cc-11ea-8bfd-fa82e1d61416.png)
+
+![image](https://user-images.githubusercontent.com/64919567/89123036-9d8e7f80-d4cc-11ea-94c6-4c52d3a72a54.png)
+![image](https://user-images.githubusercontent.com/64919567/89123044-af702280-d4cc-11ea-9e64-103e6b5b469c.png)
+
+
 
 #### `User stories and wireframe` 
 
