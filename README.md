@@ -1,6 +1,6 @@
-## `Search Restaurant App`
+## ✨ `Search Restaurant App` ✨
 
-Click here to see the deployed version
+Click here to see the deployed version 👍
 
 ## `Intro` 
 Hi I am Demi. A foodie living in Amsterdam. As a food lover going out to restaurants to eat is one of my favorite things. 
@@ -14,14 +14,16 @@ Users can look for nice restauants in Amserdam can use the app to search for res
 
 - React
 - Redux
-- Formik
-- Yup
-- React-Leaflet
+- Formik🔥
+- Yup🔥
+- React-Leaflet🔥
 - React-Bootstrap
 - Express
 - REST API
 - Sequelize
 - CSS
+
+*🔥 new technologies used in this project
 
 ## `Goals`
 - Practise fullstack development;
@@ -48,9 +50,9 @@ Users can look for nice restauants in Amserdam can use the app to search for res
 
   - I want to be able to login;
   
-  - I want to show that I went to a restaurant;
+  - I want to show that I went to a restaurant ✅ ;
   
-  - I want to like a restaurant I have visited;
+  - I want to like a restaurant I have visited 💖 ;
   
   - I want to be able to see a list of the restaurants that I've liked and the restaurants that I have been to;
   
