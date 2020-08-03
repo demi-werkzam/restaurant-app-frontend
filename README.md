@@ -4,11 +4,11 @@ Click [here](https://infallible-nightingale-c43c6d.netlify.app/) to see the depl
 
 ## `Intro` 
 Hi I am Demi. A foodie living in Amsterdam. As a food lover going out to restaurants to eat is one of my favorite things. 
-This is a the first version of the app, more features will be added. You can find them here. 
+This is a the first version of the app, more features will be added. You can find them [here](https://github.com/users/demi-werkzam/projects/1). 
 
 ## `The Search Restaurant App`
 As a lover of food and restaurants I chose to dedicate my portfolio project to other people in Amsterdam who love the same things.  
-Users can look for nice restauants in Amserdam can use the app to search for restaurants, keep a list of restaurants that they have been to, review the restaurants by liking them and inviting other users to out to a restaurant. 
+Users can look for nice restauants in Amserdam can use the app to search for restaurants, keep a list of restaurants that they have been to, review the restaurants by liking them and adding new restaurants to the map. 
 
 ## `Technology` 
 
