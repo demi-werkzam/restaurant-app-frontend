@@ -17,6 +17,8 @@ import {
   selectUserName,
   selectToken,
 } from "../../store/user/selectors";
+import { selectVisits } from "../../store/visits/selectors";
+import { selectLikes } from "../../store/likes/selectors";
 import { fetchRestaurantsWithUser } from "../../store/restaurants/actions";
 import { fetchVisitsWithUser } from "../../store/visits/actions";
 import { fetchLikesWithUser } from "../../store/likes/actions";
@@ -69,6 +71,8 @@ export default function UserDetails() {
     history.push(`/restaurants/${id}`);
   };
   const restaurants = useSelector(selectRestaurants) || [];
+  const visits = useSelector(selectVisits) || [];
+  const likes = useSelector(selectLikes) || [];
 
   return (
     <Container>
@@ -86,8 +90,8 @@ export default function UserDetails() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
-        {restaurants &&
-          restaurants.map((restaurant) => (
+        {likes &&
+          likes.map((restaurant) => (
             <Marker
               key={restaurant.id}
               position={[restaurant.latitude, restaurant.longitude]}
@@ -120,8 +124,8 @@ export default function UserDetails() {
       </Map>
       <Tabs defaultActiveKey="visited">
         <Tab eventKey="visited" title="Visited">
-          {restaurants &&
-            restaurants.map((restaurant) => (
+          {visits &&
+            visits.map((restaurant) => (
               <Visited key={restaurant.id} data={restaurant} />
             ))}
         </Tab>
