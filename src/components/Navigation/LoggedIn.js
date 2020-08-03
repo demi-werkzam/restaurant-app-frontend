@@ -26,13 +26,11 @@ export default function LoggedIn({ id }) {
         linkText="My Page"
       />
       <Nav.Item style={{ padding: ".5rem 1rem" }}></Nav.Item>
-      <Button
-        style={{ background: "black" }}
-        variant="dark"
-        href={`/home/users/${id}/restaurant`}
-      >
-        Add Restaurant
-      </Button>
+      <NavbarItem
+        className="nav-link-color "
+        path={`/home/users/${id}/restaurant`}
+        linkText="Add Restaurant"
+      />
       <Nav.Item style={{ padding: ".5rem 1rem" }}></Nav.Item>
       <Button
         style={{ background: "black" }}
