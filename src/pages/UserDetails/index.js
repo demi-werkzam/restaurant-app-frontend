@@ -90,8 +90,8 @@ export default function UserDetails() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
-        {likes &&
-          likes.map((restaurant) => (
+        {restaurants &&
+          restaurants.map((restaurant) => (
             <Marker
               key={restaurant.id}
               position={[restaurant.latitude, restaurant.longitude]}
@@ -125,9 +125,7 @@ export default function UserDetails() {
       <Tabs defaultActiveKey="visited">
         <Tab eventKey="visited" title="Visited">
           {visits &&
-            visits.map((restaurant) => (
-              <Visited key={restaurant.id} data={restaurant} />
-            ))}
+            visits.map((visit) => <Visited key={visit.id} data={visit} />)}
         </Tab>
         <Tab eventKey="your-restaurants" title="Restaurants">
           {restaurants &&
