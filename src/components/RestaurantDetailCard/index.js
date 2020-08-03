@@ -157,7 +157,7 @@ export default function RestaurantDetailCard(props) {
                 {userVisitsFiltered.length > 0 && (
                   <button
                     className="Button-group"
-                    onClick={(event) => handleLike(event.target)}
+                    onClick={(event) => handleLike}
                   >
                     <span role="img">{likedCheck}</span>
                   </button>
