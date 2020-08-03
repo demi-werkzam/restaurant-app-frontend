@@ -31,7 +31,7 @@ export const deleteLike = (id, userid, token) => {
   return async (dispatch, getState) => {
     dispatch(appLoading());
     try {
-      const response = await axios.delete(`${apiUrl}/visits/${userid}/${id}`, {
+      const response = await axios.delete(`${apiUrl}/likes/${userid}/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
