@@ -50,7 +50,7 @@ Users can look for nice restauants in Amserdam can use the app to search for res
 
 
 
-#### `User stories and wireframe` 
+#### `User stories` 
 
 - As a person looking for a restaurant to eat breakfast, lunch or dinner in Amsterdam:
 
@@ -76,12 +76,10 @@ Users can look for nice restauants in Amserdam can use the app to search for res
   
   - I want to be able to see a list of restaurants that I have added.
 
-- Wireframe 
- (URL)
  
   ## `Server Repository`
  
-The repository for the backend can be found here. This is a RESTful API using Express.js. The database is built using Postgres. Here is the data model. Object-relational mapping is done using Sequelize.
+The repository for the backend can be found [here](https://github.com/demi-werkzam/restaurant-search-app-backend). This is a RESTful API using Express.js. The database is built using Postgres. Here is the data model. Object-relational mapping is done using Sequelize.
 
 
 
