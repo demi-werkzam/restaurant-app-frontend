@@ -6,7 +6,13 @@ export default function UserRestaurants(props) {
   const { name, id, createdAt } = props.data;
 
   return (
-    <Card style={{ width: "20rem" }}>
+    <Card
+      style={{
+        height: "150px",
+        width: "300px",
+        margin: "5px",
+      }}
+    >
       <Card.Body>
         <Card.Title>{`${name}`}</Card.Title>
       </Card.Body>
