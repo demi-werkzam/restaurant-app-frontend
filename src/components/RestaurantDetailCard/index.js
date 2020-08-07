@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Jumbotron } from "react-bootstrap";
@@ -71,9 +71,9 @@ export default function RestaurantDetailCard(props) {
 
   const handleLike = (event) => {
     if (userLikesFiltered.length > 0) {
-      dispatch(addLike(id, userid, token));
-    } else {
       dispatch(deleteLike(id, userid, token));
+    } else {
+      dispatch(addLike(id, userid, token));
     }
   };
 
@@ -97,7 +97,12 @@ export default function RestaurantDetailCard(props) {
             </Col>
             <Col>
               <Card.Text>{`Follow ${name} on instagram to keep up with what they're doing`}</Card.Text>
-              <Button variant="dark" size="lg" href={`${instagram}`}>
+              <Button
+                style={{ background: "black" }}
+                variant="dark"
+                size="lg"
+                href={`${instagram}`}
+              >
                 Check out their instagram
               </Button>
               <Card border="light" style={{ padding: ".5rem 1rem" }} />
@@ -118,7 +123,12 @@ export default function RestaurantDetailCard(props) {
                 <Card.Text className="text-center">
                   Want to book a table?
                   <Card border="light" style={{ padding: ".5rem 1rem" }} />
-                  <Button variant="dark" className="btn" href={`${website}`}>
+                  <Button
+                    style={{ background: "black" }}
+                    variant="dark"
+                    className="btn"
+                    href={`${website}`}
+                  >
                     {`Visit ${name}'s website here!`}
                   </Button>
                 </Card.Text>
@@ -145,11 +155,8 @@ export default function RestaurantDetailCard(props) {
                   </button>
                 )}
                 {userVisitsFiltered.length > 0 && (
-                  <button
-                    className="Button-group"
-                    onClick={(event) => handleLike(event.target)}
-                  >
-                    <span role="img">{likedCheck}</span>
+                  <button className="Button-group" onClick={handleLike}>
+                    {likedCheck}
                   </button>
                 )}
               </Card.Body>

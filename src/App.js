@@ -38,14 +38,14 @@ function App() {
       <MessageBox />
       {isLoading ? <Loading /> : null}
       <Switch>
-        <Route exact path="/home" component={Home} />
-        <Route exact path="/" component={Start} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={SignUp} />
-        <Route path="/restaurants/:id" component={RestaurantDetails} />
-        <Route exact path="/home/users/:id" component={UserDetails} />
-        <Route path="/home/users/:id/restaurant" component={AddRestaurant} />
         <Route path="/rsvp" component={AddRsvp} />
+        <Route path="/restaurants/:id" component={RestaurantDetails} />
+        <Route path="/home/users/:id/restaurant" component={AddRestaurant} />
+        <Route exact path="/home/users/:id" component={UserDetails} />
+        <Route path="/home" component={Home} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/login" component={Login} />
+        <Route path="/" component={Start} />
       </Switch>
     </div>
   );
