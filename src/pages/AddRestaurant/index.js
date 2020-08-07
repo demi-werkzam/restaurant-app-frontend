@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
+import { LocationIq } from "locationiq";
+import Axios from "axios";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
@@ -12,13 +14,41 @@ import Button from "react-bootstrap/Button";
 import { Row } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 
+import { setMessage } from "../../store/appState/actions";
 import { selectToken, selectUserId } from "../../store/user/selectors";
 import { postNewRestaurant } from "../../store/restaurants/actions";
 
 export default function AddRestaurant() {
+  const url = `https://eu1.locationiq.com/v1/search.php?key=40406b189b7470&street=neveritaweg,59,&city=amsterdam&state=noord-holland,&country=Netherlands,&format=json&addressdetails=1&countrycodes=nl`;
   const token = useSelector(selectToken);
   const userId = useSelector(selectUserId);
   const dispatch = useDispatch();
+  const { searchedRestaurnt, setSearchedRestaurant } = useState();
+
+  const getLatLon = async () => {
+    const response = await Axios.get(url);
+    const getLatLong = response.data.map((r) => {
+      const lat = r.lat;
+      const lon = r.lon;
+      console.log(r.address.restaurant);
+      if (r.address.city !== "Amsterdam") {
+        console.log("You can only add restaurants in Amsterdam");
+        dispatch(
+          setMessage(
+            "danger",
+            true,
+            "You can only add restaurants in Amsterdam"
+          )
+        );
+      } else if (r.address.restaurant === "Pllek") {
+        dispatch(
+          setMessage("succes", true, "You've added the right restaurant")
+        );
+      } else console.log("This restaurant is in Amsterdam");
+    });
+
+    console.log(12, response.data);
+  };
 
   function addNewRestaurant(values) {
     console.log(
@@ -29,11 +59,7 @@ export default function AddRestaurant() {
       "website",
       values.website,
       "instagram",
-      values.instagram,
-      "latitude",
-      values.latitude,
-      "longitude",
-      values.longitude
+      values.instagram
     );
     dispatch(postNewRestaurant(values, token, userId));
   }
@@ -41,11 +67,9 @@ export default function AddRestaurant() {
   // Yup Schema
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("*name is required"),
-    address: Yup.string().required("*start time is required"),
+    address: Yup.string().required("*address is required"),
     website: Yup.string().required("*website is required"),
     instagram: Yup.string().required("*instagram is required"),
-    latitude: Yup.number().required("*latitude is required"),
-    longitude: Yup.number().required("*longitude is required"),
   });
   return (
     <Container>
@@ -114,11 +138,12 @@ export default function AddRestaurant() {
                   <div className="error-message">{errors.name}</div>
                 )}
               </Form.Group>
+
               <Form.Group as={Row}>
                 <Form.Label>Address</Form.Label>
                 <Form.Control
-                  id="address"
-                  placeholder="Address of the restaurant"
+                  id="Address"
+                  placeholder="eg De Dam"
                   type="text"
                   value={values.address}
                   onChange={handleChange}
@@ -132,11 +157,12 @@ export default function AddRestaurant() {
                   <div className="error-message">{errors.address}</div>
                 )}
               </Form.Group>
+
               <Form.Group as={Row}>
                 <Form.Label>Website</Form.Label>
                 <Form.Control
                   id="website"
-                  placeholder="http://"
+                  placeholder="https://"
                   type="text"
                   value={values.website}
                   onChange={handleChange}
@@ -154,7 +180,7 @@ export default function AddRestaurant() {
                 <Form.Label>Instagram</Form.Label>
                 <Form.Control
                   id="instagram"
-                  placeholder="http://instagram"
+                  placeholder="https://instagram"
                   type="text"
                   value={values.instagram}
                   onChange={handleChange}
@@ -166,40 +192,6 @@ export default function AddRestaurant() {
                 />
                 {errors.instagram && touched.instagram && (
                   <div className="error-message">{errors.instagram}</div>
-                )}
-              </Form.Group>
-              <Form.Group as={Row}>
-                <Form.Label>latitude</Form.Label>
-                <Form.Control
-                  id="latitude"
-                  type="text"
-                  value={values.latitude}
-                  onChange={handleChange}
-                  className={
-                    errors.latitude && touched.latitude
-                      ? "text-input error"
-                      : "text-input"
-                  }
-                />
-                {errors.latitude && touched.latitude && (
-                  <div className="error-message">{errors.latitude}</div>
-                )}
-              </Form.Group>
-              <Form.Group as={Row}>
-                <Form.Label>longitude</Form.Label>
-                <Form.Control
-                  id="longitude"
-                  type="text"
-                  value={values.longitude}
-                  onChange={handleChange}
-                  className={
-                    errors.longitude && touched.longitude
-                      ? "text-input error"
-                      : "text-input"
-                  }
-                />
-                {errors.longitude && touched.longitude && (
-                  <div className="error-message">{errors.longitude}</div>
                 )}
               </Form.Group>
               <Button
