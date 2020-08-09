@@ -10,6 +10,7 @@ import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
+import CardGroup from "react-bootstrap/CardGroup";
 
 import { selectRestaurants } from "../../store/restaurants/selectors";
 import {
@@ -44,22 +45,7 @@ export default function UserDetails() {
   useEffect(() => {
     if (userId !== undefined) {
       dispatch(fetchRestaurantsWithUser(userId, token));
-    }
-  }, [userId]);
-  if (!token) {
-    history.push("/");
-  }
-
-  useEffect(() => {
-    if (userId !== undefined) {
       dispatch(fetchVisitsWithUser(userId, token));
-    }
-  }, [userId]);
-  if (!token) {
-    history.push("/");
-  }
-  useEffect(() => {
-    if (userId !== undefined) {
       dispatch(fetchLikesWithUser(userId, token));
     }
   }, [userId]);
@@ -90,13 +76,13 @@ export default function UserDetails() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
-        {restaurants &&
-          restaurants.map((restaurant) => (
+        {likes &&
+          likes.map((like) => (
             <Marker
-              key={restaurant.id}
-              position={[restaurant.latitude, restaurant.longitude]}
+              key={like.id}
+              position={[like.restaurant.latitude, like.restaurant.longitude]}
               onClick={() => {
-                setActiveRestaurant(restaurant);
+                setActiveRestaurant(like.restaurant);
               }}
               icon={icon}
             />
@@ -124,14 +110,36 @@ export default function UserDetails() {
       </Map>
       <Tabs defaultActiveKey="visited">
         <Tab eventKey="visited" title="Visited">
-          {visits &&
-            visits.map((visit) => <Visited key={visit.id} data={visit} />)}
+          <CardGroup
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              flexDirection: "row",
+            }}
+          >
+            {visits &&
+              visits.map((visit) => (
+                <Visited
+                  key={visit.id}
+                  data={visit}
+                  name={visit.restaurant.name}
+                />
+              ))}
+          </CardGroup>
         </Tab>
         <Tab eventKey="your-restaurants" title="Restaurants">
-          {restaurants &&
-            restaurants.map((restaurant) => (
-              <UserRestaurants key={restaurant.id} data={restaurant} />
-            ))}
+          <CardGroup
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              flexDirection: "row",
+            }}
+          >
+            {restaurants &&
+              restaurants.map((restaurant) => (
+                <UserRestaurants key={restaurant.id} data={restaurant} />
+              ))}
+          </CardGroup>
         </Tab>
       </Tabs>
     </Container>

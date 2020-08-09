@@ -3,10 +3,17 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 
 export default function Visited(props) {
-  const { name, createdAt } = props.data;
+  const { createdAt } = props.data;
+  const { name } = props;
 
   return (
-    <Card style={{ width: "20rem" }}>
+    <Card
+      style={{
+        height: "150px",
+        width: "300px",
+        margin: "5px",
+      }}
+    >
       <Card.Body>
         <Card.Title>{`${name}`}</Card.Title>
       </Card.Body>
