@@ -30,14 +30,35 @@ export const fetchRestaurantsWithUser = (userId, token) => {
   };
 };
 
-export const postNewRestaurant = (data, token, userId) => {
+export const postNewRestaurant = (
+  name,
+  address,
+  website,
+  instagram,
+  lat,
+  lon,
+  token,
+  userId
+) => {
   return async (dispatch, getState) => {
     if (token === null) return;
     try {
-      console.log("inside post rest", data);
-      const output = await axios.post(`${apiUrl}/restaurants/${userId}`, data, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      console.log(
+        "inside post rest",
+        name,
+        address,
+        website,
+        instagram,
+        lat,
+        lon
+      );
+      const output = await axios.post(
+        `${apiUrl}/restaurants/${userId}`,
+        { name, address, website, instagram, lat, lon },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       dispatch(restaurantsFetched);
 
       dispatch(

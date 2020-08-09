@@ -13,23 +13,26 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import { Row } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
+import { apiKey } from "../../config/constants";
 
 import { setMessage } from "../../store/appState/actions";
 import { selectToken, selectUserId } from "../../store/user/selectors";
 import { postNewRestaurant } from "../../store/restaurants/actions";
 
 export default function AddRestaurant() {
-  const url = `https://eu1.locationiq.com/v1/search.php?key=40406b189b7470&street=neveritaweg,59,&city=amsterdam&state=noord-holland,&country=Netherlands,&format=json&addressdetails=1&countrycodes=nl`;
+  const [lat, setLat] = useState();
+  const [lon, setLon] = useState();
+  const [formValues, setValues] = useState();
   const token = useSelector(selectToken);
   const userId = useSelector(selectUserId);
   const dispatch = useDispatch();
-  const { searchedRestaurnt, setSearchedRestaurant } = useState();
 
-  const getLatLon = async () => {
+  const getLatLon = async (values) => {
+    const url = `https://eu1.locationiq.com/v1/search.php?key=${apiKey}&street=${values.address},&city=amsterdam&state=noord-holland,&country=Netherlands,&format=json&addressdetails=1&countrycodes=nl`;
     const response = await Axios.get(url);
     const getLatLong = response.data.map((r) => {
-      const lat = r.lat;
-      const lon = r.lon;
+      setLat(parseFloat(r.lat));
+      setLon(parseFloat(r.lon));
       console.log(r.address.restaurant);
       if (r.address.city !== "Amsterdam") {
         console.log("You can only add restaurants in Amsterdam");
@@ -40,11 +43,10 @@ export default function AddRestaurant() {
             "You can only add restaurants in Amsterdam"
           )
         );
-      } else if (r.address.restaurant === "Pllek") {
-        dispatch(
-          setMessage("succes", true, "You've added the right restaurant")
-        );
-      } else console.log("This restaurant is in Amsterdam");
+      } else {
+        setMessage("succes", true, "We have found your restaurant!");
+      }
+      console.log("This restaurant is in Amsterdam");
     });
 
     console.log(12, response.data);
@@ -61,7 +63,20 @@ export default function AddRestaurant() {
       "instagram",
       values.instagram
     );
-    dispatch(postNewRestaurant(values, token, userId));
+    console.log(123, lat, lon);
+
+    dispatch(
+      postNewRestaurant(
+        values.name,
+        values.address,
+        values.website,
+        values.instagram,
+        lat,
+        lon,
+        token,
+        userId
+      )
+    );
   }
 
   // Yup Schema
@@ -89,8 +104,6 @@ export default function AddRestaurant() {
             address: "",
             website: "",
             instagram: "",
-            latitude: "",
-            longitude: "",
           }}
           validationSchema={validationSchema}
           onSubmit={(values, { setSubmitting, resetForm }) => {
@@ -137,13 +150,11 @@ export default function AddRestaurant() {
                 {errors.name && touched.name && (
                   <div className="error-message">{errors.name}</div>
                 )}
-              </Form.Group>
 
-              <Form.Group as={Row}>
-                <Form.Label>Address</Form.Label>
+                <Form.Label>Street</Form.Label>
                 <Form.Control
-                  id="Address"
-                  placeholder="eg De Dam"
+                  id="address"
+                  placeholder="Address of the restaurant"
                   type="text"
                   value={values.address}
                   onChange={handleChange}
@@ -157,7 +168,13 @@ export default function AddRestaurant() {
                   <div className="error-message">{errors.address}</div>
                 )}
               </Form.Group>
-
+              <Button
+                style={{ background: "black" }}
+                variant="dark"
+                onClick={() => getLatLon(values)}
+              >
+                Search Restaurant
+              </Button>
               <Form.Group as={Row}>
                 <Form.Label>Website</Form.Label>
                 <Form.Control
