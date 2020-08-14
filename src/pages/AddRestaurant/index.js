@@ -35,7 +35,6 @@ export default function AddRestaurant() {
       setLon(parseFloat(r.lon));
       console.log(r.address.restaurant);
       if (r.address.city !== "Amsterdam") {
-        console.log("You can only add restaurants in Amsterdam");
         dispatch(
           setMessage(
             "danger",
@@ -44,12 +43,9 @@ export default function AddRestaurant() {
           )
         );
       } else {
-        setMessage("succes", true, "We have found your restaurant!");
+        dispatch(setMessage("succes", true, "We have found your restaurant!"));
       }
-      console.log("This restaurant is in Amsterdam");
     });
-
-    console.log(12, response.data);
   };
 
   function addNewRestaurant(values) {
@@ -154,7 +150,7 @@ export default function AddRestaurant() {
                 <Form.Label>Street</Form.Label>
                 <Form.Control
                   id="address"
-                  placeholder="Address of the restaurant"
+                  placeholder="e.g. kalverstraat, 12"
                   type="text"
                   value={values.address}
                   onChange={handleChange}
